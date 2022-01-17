@@ -1,0 +1,14 @@
+go to nodejs.org
+download and install the latest recommended stable version
+
+once you have node, download angular cli library using the terminal
+npm install -g @angular/cli (sudo for ubuntu or mac)
+
+to check angular version
+ng --version
+
+to create a new project
+ng new project-name
+
+to run the project
+ng serve
