@@ -12,3 +12,16 @@ ng new project-name
 
 to run the project
 ng serve
+
+to install typescript
+npm install -g typescript (sudo for ubuntu or mac)
+
+to check version of typescript
+tsc --version
+
+
+webpack - is a build automation tool. it gets all the scripts and stylesheets, combines them, puts them in a bundle and minifies them. it injects those bundles into index.html at run time
+
+polyfills - is used to fill the gap between the versions of JS and angular needs and the version of JS supported by most browsers.
+
+vendors - includes all the third party libraries.
