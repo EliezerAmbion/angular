@@ -11,12 +11,12 @@ class Point {
 
 // When dealing an object of a custom type, we need to explicitly allocate memory to it.
 // You initialize it by the new operator.
-// As you can see you have repeated the Point1.
-// Typescript compiler can infer it, you can get rid of (: Point1)
+// As you can see you have repeated Point.
+// Typescript compiler can infer it, you can get rid of (: Point)
 let point1: Point = new Point();
 point1.draw();
 
-// As you can see, if you hover over point2, typescript inferred the Point1 class to it.
+// As you can see, if you hover over point2, typescript inferred the Point class to it.
 let point2 = new Point();
 point2.x = 1;
 point2.x = 2;
