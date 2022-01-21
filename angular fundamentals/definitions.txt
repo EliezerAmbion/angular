@@ -1,0 +1,4 @@
+Components - encapsulates the data, HTML markup, and the logic for a view.
+App component - this is the root component. Every component starts from the app component.
+Modules - is a container for a group of related components.
+App module - this is the root module.
