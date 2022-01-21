@@ -1,13 +1,24 @@
 export class CountLikes {
-  constructor(public _likes: number, public _isClicked: boolean = false) {}
+  constructor(
+    private _likesCount: number,
+    private _isClicked: boolean = false
+  ) {}
 
   count() {
     if (this._isClicked === false) {
-      this._likes++;
+      this._likesCount++;
     } else {
-      this._likes--;
+      this._likesCount--;
     }
 
     this._isClicked = !this._isClicked;
+  }
+
+  get likesCount() {
+    return this._likesCount;
+  }
+
+  get isClicked() {
+    return this._isClicked;
   }
 }
