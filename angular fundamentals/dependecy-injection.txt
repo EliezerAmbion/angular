@@ -1,0 +1,50 @@
+Constructor - is where you initialize an object.
+In the Constructor of a COMPONENT, you need to create an instance of a service.
+e.g.
+constructor(){
+  let service = new ProductService(); // INSTANCE
+  this.sample = service.getSample()
+}
+
+NOTE: The problem with the above code is that by using the new operator, you have tightly coupled the service to the component and 
+when you add a parameter in the service, you will have to add new arguments where you use the service.
+The solution here is to let angular help you by using dependency injection.
+In order for you to use dependency injection, you need to add a parameter in the constructor of what service you want to use.
+e.g.
+constructor(service: ProductService){
+  this.sampleProduct = service.getSampleProduct()
+}
+
+With this, when angular is going to create an instance of a component, it will look at the constructor, it sees that
+the constructor has a dependency, and that dependency is of type ProductService(above example), and now angular first
+creates an instance of the service and then passes that to the constructor.
+So, when angular is going to create an instance of a component, angular can inject that dependencies to the component.
+
+Now with this implementation, when you add a parameter in the service, you don't have to modify your code in multiple places.
+Angular will automatically instantiate a new service object.
+
+LESSON: when you use the new operator inside a class, you have tightly coupled your class to that service.
+
+Now, we need to instruct angular to create an instance of the service and pass it to your component.
+Dependency Injection - instructing angular to inject dependencies of the component by using the component's constructor.
+Angular has a dependency injection framework built-in to it.
+
+In order for this to work, you need to register these dependencies in app.module.ts.
+In @NgModule decorator, there is a property called providers that is set to an array.
+In this array, you need to register all the dependencies that components in this module are dependent upon.
+
+@Ngmodule({
+  providers: [ProductService] // CREATING THE INSTANCE
+})
+
+If you forget this step, dependency injection is not going to work. It will have an error: No provider for ProductService.
+
+NOTE: when you register a dependency as a provider in a module, Angular will create a single instance of that class for that entire module.
+Singleton Pattern - In the memory we're going to have only a single instance of that service, and Angular will pass the same instance to all these components.
+
+Steps:
+1. add the service you want to use as a parameter in the component's constructor. In other words, as a dependency of this component.
+2. register that service as a provider in the app.module.
+
+With this implementation, When Angular is going to create an instance of the component, first it will instantiate its dependencies 
+and then it will inject those dependencies into the constructor of that class.

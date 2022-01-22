@@ -1,0 +1,29 @@
+In your terminal, you can generate a component using angular CLI
+----- COMPONENT -----
+syntax:
+LONG WAY: ng generate component product
+SHORT WAY: ng g c product
+NOTE: you can put --dry-run to tell the Angular CLI to only show what files would have been generated when running the commands.
+e.g.
+ng g c product --dry-run
+
+It will add a directory/folder, and in that folder it will add four(4) files.
+e.g.
+create src/app/product/product.component.css
+create src/app/product/product.component.html
+create src/app/product/product.component.spec.ts
+create src/app/product/product.component.ts
+update src/app/app.module
+
+NOTE: as you can see, it also updated the app.module and registered your component automatically.
+
+
+----- SERVICE -----
+syntax:
+LONG WAY: ng generate service product
+SHORT WAY: ng g s product
+
+Files that will be generated:
+e.g.
+create src/app/product.service.spec.ts
+create src/app/product.service.ts

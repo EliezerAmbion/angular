@@ -1,4 +1,15 @@
 Components - encapsulates the data, HTML markup, and the logic for a view.
 App component - this is the root component. Every component starts from the app component.
+
 Modules - is a container for a group of related components.
 App module - this is the root module.
+
+Service - is a class used for getting the data from an HTTP service.
+
+Constructor - is a special type of method of a class and it will be automatically invoked when an instance of the class is created.
+It is where you initialize an object.
+
+Dependency Injection - injecting or providing the dependencies of a class into its constructor.
+Instructing angular to inject dependencies of the component into its constructor.
+
+Singleton Pattern - In the memory we're going to have only a single instance of that service, and Angular will pass the same instance to all these components.

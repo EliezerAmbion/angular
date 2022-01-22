@@ -1,0 +1,4 @@
+We use directives to manipulate the dom.
+Whenever you use a directive that modifies the structure of a dom, you should prefix it
+with an *(asterisk).
+

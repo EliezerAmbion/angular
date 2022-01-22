@@ -1,0 +1,37 @@
+There are actually three(3) steps you need to follow in order to use a component.
+1. Create a component,
+2. Register the component in a module,
+3. Add the element in an HTML markup.
+
+In order for the class to be converted into a component, you need to add some metadata to it that angular understands.
+NOTE: You use a decorator to achieve this.
+In angular there is a decorator called a component(@Component) that you need to attach to a class to make the class a component.
+You need to import it first from the top.
+e.g.
+----- FIRST STEP: CREATE A COMPONENT -----
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-product',
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.css]
+})
+export class ProductComponent{}
+
+
+----- SECOND STEP: REGISTER THE COMPONENT -----
+In app.module, add your component in @NgModule's declarations.
+e.g.
+@NgModule({
+  declarations: [
+    AppComponent,
+    ProductComponent // this is the component you added
+  ]
+})
+NOTE: It should auto-import if you have the Auto-import extension in vscode.
+NOTE: The import should look like this:
+import { ProductComponent } from './product/product.component'
+
+----- THIRD STEP: ADD THE CUSTOM ELEMENT -----
+In an HTML file, add your custom element like this:
+<app-product>

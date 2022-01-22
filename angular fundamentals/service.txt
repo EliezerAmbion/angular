@@ -1,0 +1,41 @@
+STEPS FOR USING A SERVICE:
+1. create a service
+2. use dependency injection by placing the service in the component's constructor.
+3. code
+
+A service is a class used for getting or calling the data from an HTTP service.
+NOTE: The service class should have the logic for getting data.
+You can re-use this class in multiple places.
+NOTE: A service is a plain typescript class.
+
+NOTE: NEVER include the logic or calling an HTTP service in the component. We don't want to be dependent upon a live http endpoint.
+When you are writing a unit test for a component, you don't want to be dependent upon a live http endpoint.
+A component should strictly for presentation logic only.
+So you want to create a fake implementation of an HTTP service.
+
+The naming convention should have the word service in the file name and class name.
+In the service file, you want to export that class.
+e.g.
+product.service.ts // file name
+export class ProductService { // service class
+  getSampleProduct(){
+    return ['product1', 'product2', 'product3']
+  }
+}
+
+NOTE: when you generated a service using angular cli, the boilerplate will have the @Injectable decorator to it.
+You will only need that decorator only if that service has a dependencies in its constructor.
+e.g.
+
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class EmailService {
+  constructor(logService: LogService)() {}
+}
+
+If you have dependencies in your service (sample above), you need to apply the @Injectable decorator function on that class.
+This tells angular that this class is an injectable class, meaning you can inject dependencies of this class into its constructor.
+
+You don't need the @Injectable decorator when defining components, because when you use the component decorator, that 
+decorator internally include the @Injectable decorator.
