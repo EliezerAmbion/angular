@@ -1,0 +1,13 @@
+DOM is a model of objects that represent the structure of a document. It's essentially a tree of objects in memory.
+HTML is a markup language that we use to represent DOM in text.
+
+So when your browser parses an HTML document, it creates a tree of objects in memory that they refer to as the DOM.
+You can also use other languages like vanilla javascript to create a DOM but using html is far more simpler.
+
+NOTE: Most of the attributes of HTML elements have a one-to-one mapping for properties of DOM objects. But, there are a few exceptions.
+For example we have HTML attributes that don't have a representation in the DOM.
+colspan is an example of that. So when we parse the HTML markup, and create an actual DOM object for td. <td [colspan]="sample">, that DOM object does not have a property called colspan, then you will get an error.
+
+There are also properties in DOME that do not have a representation in HTML. e.g. <h1 [textContent]="sample">
+
+REMEMBER: When using property binding, you should remember that you are actually binding property of a DOM object and not an attribute of an HTML element.

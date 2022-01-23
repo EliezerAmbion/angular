@@ -1,0 +1,13 @@
+Property Binding - it binds a Property of a DOM element, like src, to a field where property in your component. 
+Attribute Binding - it binds an attribute of an HTML element, like colspan, to a field where property in your component.
+- They are used to transfer data from SOURCE to the VIEW, and when something changes in the SOURCE, the VIEW or the DOM gets notified and also changes.
+
+NOTE: it only works one way - from component to the DOM.
+
+e.g. of property binding
+<input [value]="newPost"></input>
+- You have bound the value property using property binding.
+
+e.g. of attribute binding
+<td [attr.colspan]="sample"></td>
+- When using attribute binding, you need to prefix this attribute with attr which is short for attribute.

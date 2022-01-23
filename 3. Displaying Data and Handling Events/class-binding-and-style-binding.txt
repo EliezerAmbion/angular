@@ -1,0 +1,14 @@
+There are times that you want to add additional classes to an element based on some condition.
+For example you want to add a class on a button based on the state of the underlying component.
+
+e.g.
+isActive = true;
+<button [class.active]="isActive">Save<button>
+
+NOTE: If the condition evaluates to true, the class will be added to the element.
+
+
+----- STYLE BINDING -----
+e.g.
+<button [style.backgroundColor]="isActive ? 'blue' : 'white'">Save<button>
+NOTE: blue and white are in single quotes.
