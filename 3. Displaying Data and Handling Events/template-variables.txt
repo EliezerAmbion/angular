@@ -1,0 +1,33 @@
+TEMPLATE VARIABLES - a reference to the DOM element within a template.
+
+Let us imagine that we want to get the value that was typed into the input field.
+
+----- LONG WAY -----
+e.g.
+<input (keyup.enter)="onKeyUp($event)" />
+
+In method:
+export class SampleComponent {
+  onKeyUp($event){
+    console.log($event.target.value);
+  }
+}
+
+Instead of passing the event object around, we can declare a variable in your template that reference the input field.
+----- BETTER WAY -----
+e.g.
+<input #email (keyup.enter)="onKeyUp(email.value)" />
+
+In method:
+export class SampleComponent {
+  onKeyUp(email){
+    console.log(email);
+  }
+}
+
+Using the hashtag, you can create a name of your variable. We call this a TEMPLATE VARIABLE. And this references the input field that you created above.
+e.g.
+#email
+
+NOTE: Instead of passing the event object around, you can pass email.value.
+As the parameter to the method, you can simply receive the actual value, in this case, the email address.

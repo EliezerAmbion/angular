@@ -1,0 +1,31 @@
+EVENT BINDING - is used to transfer data from VIEW to the SOURCE / COMPONENT CLASS, and when something changes in the VIEW, the SOURCE gets notified and also changes.
+
+NOTE: you should wrap the event in parenthesis.
+e.g
+<button (click)="onAddPost()"></button>
+- onAddPost() is a function/method in the component class/model
+
+The $event will get access to the event object that was raised in the event handler.
+For example, with mouse movements, the event object will tell you the x and y position.
+
+If you want to get access to that event object, you need to add the $event as a parameter.
+e.g.
+<button (click)="onAddPost($event)"></button>
+
+In the method, you should add $event in the parameter as well.
+e.g.
+onAddPost($event){
+  return sampleEvent;
+}
+
+NOTE: when you create a custom component, the $event will represent a custom event that you define in your application.
+
+All the DOM events bubble up the DOM tree, unless a handler along the way prevents further bubbling.
+This is just the standard event propagation mechanism in DOM, that is nothing specific about Angular.
+You can stop the event bubbling by adding stopPropagation() in the method that has a $event.
+
+e.g.
+onAddPost($event) {
+  $event.stopPropagation();
+  console.log('Button was clicked', $event);
+}

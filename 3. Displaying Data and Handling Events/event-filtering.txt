@@ -1,0 +1,27 @@
+In Angular there is a concept called event filtering.
+----- TRADITIONAL WAY -----
+e.g.
+<input (keyup)="onKeyUp($event)" />
+
+In your method:
+export class SampleComponent {
+  onKeyUp($event){
+    if($event.keyCode === 13) console.log('ENTER was pressed'); // 13 is the key code for enter
+  }
+}
+
+In angular there is a better way in handling an event.
+----- ANGULAR WAY -----
+e.g.
+<input (keyup.enter)="onKeyUp()" />
+
+- In keyup event, you can add the (.enter). The onKeyUp method will be called only if you press enter.
+OPTIONAL: You don't have to pass the $event object anymore.
+
+In your method:
+export class SampleComponent {
+  onKeyUp(){
+    console.log('ENTER was pressed');
+}
+
+As you can see, the second example is much cleaner.
