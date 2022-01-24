@@ -1,4 +1,6 @@
 In Angular there is a concept called event filtering.
+EVENT FILTERING - is when you can use the properties of an event.
+
 ----- TRADITIONAL WAY -----
 e.g.
 <input (keyup)="onKeyUp($event)" />
@@ -13,7 +15,7 @@ export class SampleComponent {
 In angular there is a better way in handling an event.
 ----- ANGULAR WAY -----
 e.g.
-<input (keyup.enter)="onKeyUp()" />
+<input (keyup.enter)="onKeyUp()" /> // .enter is EVENT FILTERING
 
 - In keyup event, you can add the (.enter). The onKeyUp method will be called only if you press enter.
 OPTIONAL: You don't have to pass the $event object anymore.
