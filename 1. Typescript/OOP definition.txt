@@ -1,4 +1,4 @@
-Field ,class variables, member variables, and attributes are more-or-less the same - is a language-specific term for instance variable, that is, an attribute whose value is specific to each object.
+Fields ,class variables, member variables, and attributes are more-or-less the same - is a language-specific term for instance variable, that is, an attribute whose value is specific to each object.
 
 Properties (Methods) - provide a level of abstraction allowing you to change the fields while not affecting the external way they are accessed by the things that use your class. Therefore we wrap fields with Properties to give us the ability to change the implementation without breaking code.
 

@@ -4,6 +4,7 @@
 // NOTE: _x and property x are not the same. You just used _x as a convention for you to use the lower case x in other place.
 
 class Prop {
+  // inside the constructor are the fields (_x and _y)
   constructor(private _x: number, private _y: number) {}
 
   // this is the property

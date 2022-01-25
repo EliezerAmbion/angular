@@ -1,0 +1,23 @@
+First you need to import FormsModule in app.module then add FormsModule to imports array
+
+import { FormsModule } from 'angular/forms';
+
+imports: [
+  BrowserModule,
+  FormsModule
+]
+
+e.g.
+<input [(ngModel)]="email" (keyup.enter)="onKeyUp()" />
+
+In method:
+export class SampleComponent {
+  email;
+
+  onKeyUp() {
+    console.log(this.email)
+  }
+}
+
+With the example above, it is much cleaner because you don't need to pass any parameters in your method.
+You just need to add a field in your class.
