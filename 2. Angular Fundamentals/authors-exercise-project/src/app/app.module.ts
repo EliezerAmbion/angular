@@ -4,9 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AuthorComponent } from './author/author.component';
+import { FavoriteComponent } from './favorite/favorite.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthorComponent],
+  declarations: [AppComponent, AuthorComponent, FavoriteComponent],
   imports: [BrowserModule],
   providers: [AuthorService],
   bootstrap: [AppComponent],
