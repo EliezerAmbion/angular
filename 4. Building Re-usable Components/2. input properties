@@ -1,0 +1,17 @@
+You need to use input property to make use of property binding.
+
+First, you need to import the decorator function from angular/core
+-  import { Component, OnInit, Input } from '@angular/core';
+
+Second, you can now use the input decorator in your field.
+e.g.
+@Input() isFavorite: boolean = false;
+
+NOTE: @Input() is another decorator in angular for marking fields and properties as input properties.
+
+With the code above, that field is exposed to the outside, and in your template you can bind it to a property.
+e.g.
+<app-favorite [isFavorite]='post.isFavorite'></app-favorite>
+
+NOTE: the [isFavorite] if and input field coming from the favorite component and the
+post.isFavorite if coming from the database.
