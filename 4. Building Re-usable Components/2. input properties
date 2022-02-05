@@ -7,11 +7,23 @@ Second, you can now use the input decorator in your field.
 e.g.
 @Input() isFavorite: boolean = false;
 
+Third, use your custom property in your method.
+e.g.
+onClick(){
+  this.isFavorite = !this.isFavorite
+}
+
 NOTE: @Input() is another decorator in angular for marking fields and properties as input properties.
 
 With the code above, that field is exposed to the outside, and in your template you can bind it to a property.
 e.g.
 <app-favorite [isFavorite]='post.isFavorite'></app-favorite>
 
-NOTE: the [isFavorite] if and input field coming from the favorite component and the
-post.isFavorite if coming from the database.
+NOTE: the [isFavorite] is an input field coming from the favorite component and the
+post.isFavorite is coming from the database from the host component that uses the app-favorite component.
+
+You can alias an input as well.
+e.g.
+@Input('is-favorite') isFavorite = false;
+
+As you can see, inside the @Input() decorator, there is an alias called is-favorite.

@@ -1,0 +1,97 @@
+COMPLETE CODE:
+----------------------------------------------------------------------------------------------
+
+host component HTML:
+<app-favorite [isFavorite]='post.isFavorite' (onChange)="onFavoriteChanged($event)"></app-favorite>
+
+----------------------------------------------------------------------------------------------
+
+host component .ts:
+import { Component } from '@angular/core';
+import { FavoriteChangedEventArgs } from './favorite/favorite.component';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  post = {
+    title: 'Test Title',
+    isFavorite: false,
+  };
+
+  onFavoriteChanged(eventArgs: FavoriteChangedEventArgs) {
+    console.log('clicked', eventArgs)
+  }
+}
+
+----------------------------------------------------------------------------------------------
+
+favorite component .ts:
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-favorite',
+  templateUrl: './favorite.component.html',
+  styleUrls: ['./favorite.component.css'],
+})
+export class FavoriteComponent {
+  @Input() isFavorite: boolean = false;
+  @Output() onChange = new EventEmitter();
+
+  constructor() {}
+
+  onClick() {
+    this.isFavorite = !this.isFavorite;
+    this.onChange.emit({ newValue: this.isFavorite });
+  }
+}
+
+-----------------------------------------------------------------------------------------------
+
+interface:
+export interface FavoriteChangedEventArgs {
+  newValue: boolean;
+}
+
+-----------------------------------------------------------------------------------------------
+
+Passing Event Data
+
+When emitting and event, you can optionally pass some value, and this value will be available to all subscribers of this event.
+The subscriber of the event is the one that uses the Output property you have created because that is where they are handling this event.
+It is where you are getting notified when the state of the favorite component changes.
+
+First Step:
+In your method where you are emitting, you can pass an argument to the emit method.
+Most of the time, you are dealing with objects when passing data. Notice below that when you emit, it is in object.
+e.g.
+onClick(){
+  this.isFavorite = !this.isFavorite;
+  this.onChange.emit({ newValue: this.isFavorite });
+}
+
+Second Step:
+In host component, add a parameter.
+If you're dealing with a complex implementation, you may want to apply a type annotation so you get compile time checking,
+as well as intellisense in this method.
+e.g.
+onFavoriteChanged(eventArgs: FavoriteChangedEventArgs) {
+  console.log('clicked', eventArgs)
+}
+
+NOTE: The FavoriteChangedEventArgs is an interface.
+This interface represents the shape of the object that is passed along with the onChange event of your favorite component,
+In this object we're going to have newValue property, which is a boolean.
+
+Third Step:
+In host component HTML where you are handling the event, you want to pass a $event object to your event handler.
+e.g.
+<app-favorite [isFavorite]='post.isFavorite' (onChange)="onFavoriteChanged($event)"></app-favorite>
+
+NOTE: when handling a click event of buttons, we use the $event object which is a built in object in Angular.
+When handling the click event of buttons, this dollar event represented a standard dom event object.
+
+Because we are dealing with a custom component, this dollar event could be anything that you pass when raising an event.
+In the case above, it's going to be an object that has a property called newValue.
