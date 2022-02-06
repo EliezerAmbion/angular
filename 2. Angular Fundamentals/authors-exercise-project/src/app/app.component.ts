@@ -13,4 +13,8 @@ export class AppComponent {
     title: 'Test Title',
     isFavorite: false,
   };
+
+  isFavoriteChanged(args: any) {
+    console.log('args ', args);
+  }
 }

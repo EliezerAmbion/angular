@@ -3,7 +3,10 @@
 <br />
 <br />
 <h3>Exercise: Favorite component</h3>
-<app-favorite [isFavorite]="post.isFavorite"></app-favorite>
+<app-favorite
+  [isFavorite]="post.isFavorite"
+  (change)="isFavoriteChanged($event)"
+></app-favorite>
 
 <br />
 <br />
