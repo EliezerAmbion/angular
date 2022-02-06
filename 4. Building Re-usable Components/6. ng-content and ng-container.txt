@@ -1,0 +1,40 @@
+ng-content is used if you want the user of these components to be able to provide custom content.
+
+COMPLETE CODE:
+In your template component, you used here the ng-content.
+NOTE: The select attribute is set to CSS selector - You reference a class or ID or element.
+--------------------------------------------------------------------------------------
+
+<div class="panel-container">
+  <div class="panel-heading">
+    <ng-content select=".heading"></ng-content>
+  </div>
+  <div class="panel-body">
+    <ng-content select=".body"></ng-content>
+  </div>
+</div>
+
+--------------------------------------------------------------------------------------
+
+In your host component:
+<app-panel>
+  <div class="heading">Heading</div>
+  <div class="body">
+    <h2>Body</h2>
+    <p>Some content...</p>
+  </div>
+</app-panel>
+
+NOTE: notice that you have placed a markup inside the custom component - <app-panel></app-panel>
+
+--------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
+
+ng-container is used when you don't want to use block element tags like div, section, etc...
+if you use a block element tag, if you inspect it in dev tools, it will look like this:
+e.g.
+<heading>TITLE: </heading>
+
+if you use ng-container, it will just the TITLE: and will not have a block element if you inspect it in dev tools.
+
+NOTE: the benefit of this is that the app will render much faster. BUT DON'T OVERUSE IT.
