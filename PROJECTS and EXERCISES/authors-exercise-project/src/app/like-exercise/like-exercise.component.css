@@ -1,0 +1,14 @@
+.like {
+  color: #ccc;
+  cursor: pointer;
+  font-size: 25px;
+  margin-right: 10px;
+}
+
+.clicked {
+  color: deeppink;
+}
+
+.num-likes {
+  font-size: 25px;
+}

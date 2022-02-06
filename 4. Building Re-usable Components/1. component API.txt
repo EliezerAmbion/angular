@@ -1,4 +1,4 @@
-We use input and output properties for out custom components.
+We use input and output properties for our custom components.
 In order to make a component more reusable, we want to add input and output properties.
 
 We use INPUT properties to pass input or state to a component.

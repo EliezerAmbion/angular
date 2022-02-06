@@ -8,6 +8,7 @@ import { FavoriteComponent } from './favorite/favorite.component';
 import { TitleCasingExerciseComponent } from './title-casing-exercise/title-casing-exercise.component';
 import { FormsModule } from '@angular/forms';
 import { TitleCasePipe } from './title-case.pipe';
+import { LikeExerciseComponent } from './like-exercise/like-exercise.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { TitleCasePipe } from './title-case.pipe';
     FavoriteComponent,
     TitleCasingExerciseComponent,
     TitleCasePipe,
+    LikeExerciseComponent,
   ],
   imports: [BrowserModule, FormsModule],
   providers: [AuthorService],

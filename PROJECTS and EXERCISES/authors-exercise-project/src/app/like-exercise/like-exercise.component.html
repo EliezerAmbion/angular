@@ -1,0 +1,12 @@
+<span
+  class="like glyphicon glyphicon-heart"
+  (click)="onClick()"
+  [class.clicked]="isActive"
+>
+</span>
+<span class="num-likes">{{ likeCount }}</span>
+<!--
+  you can use style binding as well
+  e.g.
+  [style.color]="isActive ? 'pink' : '#ccc'"
+-->

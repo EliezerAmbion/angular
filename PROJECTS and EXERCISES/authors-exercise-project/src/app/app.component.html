@@ -1,14 +1,24 @@
-<app-author></app-author>
+<div class="container">
+  <app-author></app-author>
 
-<br />
-<br />
-<h3>Exercise: Favorite component</h3>
-<app-favorite
-  [isFavorite]="post.isFavorite"
-  (change)="isFavoriteChanged($event)"
-></app-favorite>
+  <br />
+  <br />
+  <h3>Exercise: Favorite component</h3>
+  <app-favorite
+    [isFavorite]="post.isFavorite"
+    (change)="isFavoriteChanged($event)"
+  ></app-favorite>
 
-<br />
-<br />
-<h3>Exercise: Title Casing</h3>
-<app-title-casing-exercise></app-title-casing-exercise>
+  <br />
+  <br />
+  <h3>Exercise: Title Casing</h3>
+  <app-title-casing-exercise></app-title-casing-exercise>
+
+  <br />
+  <br />
+  <h3>Exercise: Like Component</h3>
+  <app-like-exercise
+    [isActive]="tweet.isActive"
+    [likeCount]="tweet.likesCount"
+  ></app-like-exercise>
+</div>

@@ -1,9 +1,8 @@
-NOTE: USE TWO-WAY-BINDING(ngModel) INSTEAD OF TEMPLATE VARIABLES.
+NOTE: USE TWO-WAY-BINDING(ngModel) INSTEAD OF TEMPLATE VARIABLES when creating FORMS.
 When you use template variable, you will pass parameters around. Passing of parameters around is called procedural programming, and it is the OLD WAY. 
 You have to use object oriented programming instead.
 -> see two way binding.txt <-
 -------------------------------------------------------------------------------------------------------------------------------------
-I JUST SAVED THIS TXT FILE FOR REFERENCE.
 
 
 TEMPLATE VARIABLES - a reference to the DOM element within a template.

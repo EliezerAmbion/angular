@@ -17,4 +17,10 @@ export class AppComponent {
   isFavoriteChanged(args: any) {
     console.log('args ', args);
   }
+
+  // let us imagine that the tweet here is coming from the database. This is just a sample data that is why it is hardcoded.
+  tweet = {
+    likesCount: 10,
+    isActive: false,
+  };
 }
