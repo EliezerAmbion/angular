@@ -2,7 +2,7 @@ COMPLETE CODE:
 ----------------------------------------------------------------------------------------------
 
 host component HTML:
-<app-favorite [isFavorite]='post.isFavorite' (onChange)="onFavoriteChanged()"></app-favorite>
+<app-favorite [isFavorite]='post.isFavorite' (change)="onFavoriteChanged()"></app-favorite>
 
 ----------------------------------------------------------------------------------------------
 
@@ -37,13 +37,13 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class FavoriteComponent {
   @Input() isFavorite: boolean = false;
-  @Output() onChange = new EventEmitter();
+  @Output() change = new EventEmitter();
 
   constructor() {}
 
   onClick() {
     this.isFavorite = !this.isFavorite;
-    this.onChange.emit();
+    this.change.emit();
   }
 }
 
@@ -52,9 +52,9 @@ export class FavoriteComponent {
 
 Output properties are used when you want to create or raise a custom event.
 e.g.
-<app-favorite [isFavorite]='post.isFavorite' (onChange)="onFavoriteChanged()"></app-favorite>
+<app-favorite [isFavorite]='post.isFavorite' (change)="onFavoriteChanged()"></app-favorite>
 
-NOTE: The onChange is a custom event field from the app-favorite component.
+NOTE: The change is a custom event field from the app-favorite component.
 NOTE: The onFavoriteChanged() is the method from your host component.
 NOTE: You will get notified whenever a user clicked the favorite component.
 
@@ -67,10 +67,10 @@ onFavoriteChanged() {
 In favorite component, you need to import the decorator function from angular/core
 -  import { Component, OnInit, Input, Output } from '@angular/core';
 
-Then create a field named onChange and decorate this field with an Output decorator.
+Then create a field named change and decorate this field with an Output decorator.
 When you use an Output decorator, you should initialize this field to an instance of the EventEmitter class.
 e.g.
-@Output() onChange = new EventEmitter();
+@Output() change = new EventEmitter();
 
 NOTE: Because EventEmitter is not a primitive type in TypeScript or in Javascript, you need to use the new operator
 to create an instance of this class.
@@ -83,7 +83,13 @@ In favorite component, you want to raise an event by using emit method:
 e.g.
 onClick(){
   this.isFavorite = !this.isFavorite;
-  this.onChange.emit();
+  this.change.emit();
 }
 
 NOTE: emit is used to raise or publish an event, which is basically means notifying others that somethings has happened.
+
+-----------------------------------------------------------------------------------------------
+
+you can alias an Output property as well.
+e.g.
+@Output('change') click = new EventEmitter();

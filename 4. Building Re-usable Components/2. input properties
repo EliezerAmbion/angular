@@ -22,8 +22,10 @@ e.g.
 NOTE: the [isFavorite] is an input field coming from the favorite component and the
 post.isFavorite is coming from the database from the host component that uses the app-favorite component.
 
+---------------------------------------------------------------------------------------------------------------
+
 You can alias an input as well.
 e.g.
-@Input('is-favorite') isFavorite = false;
+@Input('is-favorite') isSelected = false;
 
 As you can see, inside the @Input() decorator, there is an alias called is-favorite.

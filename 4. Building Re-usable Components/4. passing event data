@@ -2,7 +2,7 @@ COMPLETE CODE:
 ----------------------------------------------------------------------------------------------
 
 host component HTML:
-<app-favorite [isFavorite]='post.isFavorite' (onChange)="onFavoriteChanged($event)"></app-favorite>
+<app-favorite [isFavorite]='post.isFavorite' (change)="onFavoriteChanged($event)"></app-favorite>
 
 ----------------------------------------------------------------------------------------------
 
@@ -38,13 +38,13 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class FavoriteComponent {
   @Input() isFavorite: boolean = false;
-  @Output() onChange = new EventEmitter();
+  @Output() change = new EventEmitter();
 
   constructor() {}
 
   onClick() {
     this.isFavorite = !this.isFavorite;
-    this.onChange.emit({ newValue: this.isFavorite });
+    this.change.emit({ newValue: this.isFavorite });
   }
 }
 
@@ -69,7 +69,7 @@ Most of the time, you are dealing with objects when passing data. Notice below t
 e.g.
 onClick(){
   this.isFavorite = !this.isFavorite;
-  this.onChange.emit({ newValue: this.isFavorite });
+  this.change.emit({ newValue: this.isFavorite });
 }
 
 Second Step:
@@ -82,13 +82,13 @@ onFavoriteChanged(eventArgs: FavoriteChangedEventArgs) {
 }
 
 NOTE: The FavoriteChangedEventArgs is an interface.
-This interface represents the shape of the object that is passed along with the onChange event of your favorite component,
+This interface represents the shape of the object that is passed along with the change event of your favorite component,
 In this object we're going to have newValue property, which is a boolean.
 
 Third Step:
 In host component HTML where you are handling the event, you want to pass a $event object to your event handler.
 e.g.
-<app-favorite [isFavorite]='post.isFavorite' (onChange)="onFavoriteChanged($event)"></app-favorite>
+<app-favorite [isFavorite]='post.isFavorite' (change)="onFavoriteChanged($event)"></app-favorite>
 
 NOTE: when handling a click event of buttons, we use the $event object which is a built in object in Angular.
 When handling the click event of buttons, this dollar event represented a standard dom event object.
