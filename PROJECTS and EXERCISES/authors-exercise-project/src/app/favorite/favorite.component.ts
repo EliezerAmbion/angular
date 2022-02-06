@@ -16,3 +16,7 @@ export class FavoriteComponent {
     this.change.emit(this.isFavorite);
   }
 }
+
+export interface FavoriteChangedEventArgs {
+  newValue: boolean;
+}
