@@ -13,3 +13,6 @@ Dependency Injection - injecting or providing the dependencies of a class into i
 Instructing angular to inject dependencies of the component into its constructor.
 
 Singleton Pattern - In the memory we're going to have only a single instance of that service, and Angular will pass the same instance to all these components.
+
+Structural directives - are used for shaping or reshaping HTML DOM by adding, removing elements.
+Attribute directives - are used to change the appearance or behavior of DOM element.

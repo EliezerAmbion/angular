@@ -1,0 +1,38 @@
+Angular has this change detection mechanism.
+Whenever you click a button, or whenever an ajax request or timer function completes, 
+Angular performs it's change detection.
+
+e.g.
+It looks at our component, it knows that the courses field now
+has a new object, that's the course with id 4.
+So then it will render that course.
+
+COMPLETE CODE:
+
+<button (click)="onAdd()"> ADD </button>
+
+<li *ngFor="let course of courses; index as i>
+  {{ i }} - {{ course.name }}
+  <button (click)="onRemove(course)"> Remove </button>
+</li>
+
+in .ts:
+export class AppComponent {
+  courses = [
+    { id: 1, name: 'course1' },
+    { id: 2, name: 'course2' },
+    { id: 3, name: 'course3' },
+  ];
+
+  onAdd() {
+    this.courses.push({ id: 4, name: 'course4' })
+  }
+
+  onRemove(course) {
+    let index = this.course.indexOf(course);
+    this.courses.splice(index, 1);
+  }
+}
+
+Similarly, in onRemove method, Angular performed its change detection, it realized that
+one of the objects in our courses array is no longer there, so it removed the corresponding list item in the DOM.

@@ -1,0 +1,54 @@
+Angular, by default, tracks object by their identity. So for example, you have 3 objects, these objects have 
+different references in the memory.
+
+When you reset the page, even though you are dealing with the exact same content, these objects will be different 
+from the previous ones in memory.
+
+If you don't use trackby in ngFor, every time you click a button or load the page, Angular will reconstruct 
+the entire DOM object tree of what is inside the ngFor.
+
+if you're working with a large list or a list with a complex markup, and sometime during the life cycle of your page, 
+you're going to call the backend to download these objects, Angular is going to reconstruct the entire DOM object tree.
+
+In ngFor directive, you have the ability to change how Angular tracks objects.
+To do this, we want to instruct Angular to use a different mechanism to track objects.
+
+NOTE: If you see a purple highlight, or any other highlight when you are reloading or clicking an ngFor button, that means 
+Angular is tracking the objects by their identity.
+
+NOTE: instead of tracking them by their identity, or the reference in the memory, we want to track them by their ID.
+e.g. syntax:
+
+<li *ngFor="let course of courses; trackBy: trackCourse >
+
+NOTE: don't use () when using the method.
+NOTE: don't call the method, just add the method as a reference.
+
+COMPLETE CODE:
+
+<button (click)="loadCourses()"> Load Courses </button>
+<ul>
+  <li *ngFor="let course of courses; trackBy: trackCourse >
+    {{ course.name }}
+  </li>
+</ul>
+
+
+in .ts:
+export class AppComponent {
+  courses = [
+    { id: 1, name: 'course1' },
+    { id: 2, name: 'course2' },
+    { id: 3, name: 'course3' },
+  ];
+
+  loadCourses(){
+    return this.courses;
+  }
+
+  trackCourse(index, course){
+    return course ? course.id : undefined;
+  }
+}
+
+NOTE: this method should take two parameters - index and item.

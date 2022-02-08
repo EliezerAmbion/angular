@@ -31,10 +31,10 @@ NOTE: notice that you have placed a markup inside the custom component - <app-pa
 --------------------------------------------------------------------------------------
 
 ng-container is used when you don't want to use block element tags like div, section, etc...
-if you use a block element tag, if you inspect it in dev tools, it will look like this:
+if you inspect a block element tag in dev tools, it will look like this:
 e.g.
 <heading>TITLE: </heading>
 
-if you use ng-container, it will just the TITLE: and will not have a block element if you inspect it in dev tools.
+if you use ng-container, TITLE: will just show and will not have a block element if you inspect it in dev tools.
 
 NOTE: the benefit of this is that the app will render much faster. BUT DON'T OVERUSE IT.

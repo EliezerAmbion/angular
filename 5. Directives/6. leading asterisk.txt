@@ -1,0 +1,28 @@
+When we use the leading asterisk with our structural directives, like ngIf, ngFor, and ngSwitchCase, 
+Angular is going to rewrite that block using an ng template. 
+Now obviously you can do this yourself, but it's much easier to use the leading asterisk and let Angular do the hard work.
+
+When we use the leading asterisk on ngIf, you're telling Angular to rewrite the markup, 
+rewrite the block using an ng-template element.
+
+e.g.
+
+<div *ngIf="courses.length > 0; else noCourses">
+  List of Courses
+</div>
+
+With the code above, using a leading asterisk, Angular will rewrite it like this:
+
+<ng-template [ngIf]="courses.length > 0">
+  <div>
+    List of Courses
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="!(courses.length > 0)">
+  <div>
+    List of Courses
+  </div>
+</ng-template>
+
+NOTE: Angular will going to apply ngIf as property binding on the ng-template.

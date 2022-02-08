@@ -1,0 +1,31 @@
+COMPLETE CODE:
+
+in .ts:
+export class AppComponent {
+  courses = [
+    { id: 1, name: 'course1' },
+    { id: 2, name: 'course2' },
+    { id: 3, name: 'course3' },
+  ]
+}
+
+in HTML:
+
+<ul>
+  <li *ngFor="let course of courses>
+    {{ course.name }}
+  </li>
+</ul>
+
+This ngFor directive exports a lot of values that might help you build certain features. 
+For example imagine you want to render a table, and you want to highlight the first row, or maybe you want to highlight
+the last row, or you want to highlight the odd or even rows. Or maybe you want to display an index next to each object.
+We can use the exported values from ngFor directive. 
+
+One of the exported values is called index.
+e.g.
+<li *ngFor="let course of courses; index as i>
+  {{ i }} - {{ course.name }}
+</li>
+
+NOTE: you can find all the exported values in angular.io website and search for ngForOf.

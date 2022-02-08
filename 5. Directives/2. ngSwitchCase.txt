@@ -1,0 +1,24 @@
+Angular adds a new property to our DOM elements that is not part of the standard DOM, this property is called ngSwitch. 
+We can use property binding ngSwitch and bind this to a field in our class.
+
+COMPLETE CODE:
+
+in html:
+<ul>
+  <li [class.active]="viewMode == 'map'"><a (click)="viewMode = 'map'">MAP VIEW</a></li>
+  <li [class.active]="viewMode == 'list'"><a (click)="viewMode = 'list'">LIST VIEW</a></li>
+</ul>
+
+<div [ngSwitch]="viewMode">
+  <div *ngSwitchCase="'map'">MAP VIEW CONTENT</div>
+  <div *ngSwitchCase="'list'">LIST VIEW CONTENT</div>
+  <div *ngSwitchDefault="'list'">NO CONTENT</div>
+</div>
+
+
+in .ts:
+export class AppComponent {
+  viewMode = 'map';
+}
+
+NOTE: you can create a method for you click event.

@@ -1,0 +1,31 @@
+COMPLETE CODE:
+
+<div *ngIf="courses.length > 0; then coursesList else noCourses"></div>
+<ng-template #coursesList>
+  LIST OF COURSES
+</ng-template>
+
+<ng-template #noCourses>
+  NO COURSES YET
+</ng-template>
+
+NOTE: when using template variables, you don't have to put #. e.g. in line num 3
+
+----------------------------------------------------------------------------------------
+
+HIDDEN PROPERTY:
+the hidden attribute in HTML also exists as a property in your DOM objects, so you can use property binding.
+e.g.
+
+<div [hidden]="courses.length > 0">
+  LIST OF COURSES
+</div>
+
+<div [hidden]="courses.length == 0">
+  NO COURSES YET
+</div>
+
+NOTE: both divs will exist in your DOM even if the first condition or the second condition is truthy.
+NOTE: the main difference between using *ngIf and the hidden property is that when you use ngIf on an element, 
+if the condition evaluates to falsey, that element is removed from the DOM. When you use the hidden attribute, the 
+element is in the DOM, it is just hidden.
