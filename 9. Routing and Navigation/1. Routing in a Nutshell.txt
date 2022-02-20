@@ -1,0 +1,9 @@
+Router Module - in this module, we have a bunch of directives and services that we use of implementing navigation in our applications. 
+
+Three (3) steps to implement navigation.
+
+- Configure the routes. Each route determines what component should be visible when the user navigates to a certain URL.
+
+- Add a router outlet. To display the corrensponding component when a given route becomes active.
+
+- Add links.
