@@ -24,4 +24,7 @@ export class AppComponent {
     likesCount: 10,
     isActive: false,
   };
+
+  test = [1, 2];
+  isLoggedIn = true;
 }

@@ -22,3 +22,21 @@
     [likeCount]="tweet.likesCount"
   ></app-like-exercise>
 </div>
+
+<!-- <div *ngIf="test.length > 0; else testElse"></div>
+<ng-template #testIf> TEST IF </ng-template>
+<ng-template #testElse> TEST ELSE </ng-template> -->
+
+<!--
+  NOTE: if you use a directive inside a div, it will not render the div tag.
+  NOTE: is it better to use ng-container instead?
+  NOTE: ng-template should be outside the *ngIf block
+-->
+
+<!-- BETTER WAY? -->
+<ng-container
+  *ngIf="test.length < 0; then testIf; else testElse"
+></ng-container>
+
+<ng-template #testIf> tesstIf </ng-template>
+<ng-template #testElse> tesstElse </ng-template>

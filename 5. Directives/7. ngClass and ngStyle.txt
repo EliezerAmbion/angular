@@ -1,0 +1,28 @@
+ngClass is an attribute directive.
+
+COMPLETE CODE SAMPLE:
+
+<span class="glyphicon" [ngClass]="{
+	'glyphicon-star': isSelected,
+	'glyphicon-star-empty': !isSelected
+}"></span>
+
+When using ngClass, you are going to have an object. That object have one or more key value pairs.
+
+NOTE: notice that the class is wrapped around in quotes.
+
+------------------------------------------------------------------
+
+ngStyle, same as the ngClass.
+
+NOTE: it is better to encapsulate the styles in the css or sass class instead of adding multiple styles here.
+
+COMPLETE CODE SAMPLE:
+
+
+<button [ngStyle]="{
+  'backgroundColor': isClicked ? 'blue' : 'gray',
+  'color': isClicked ? 'white' : 'black'
+}">
+  save
+</button>

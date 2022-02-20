@@ -1,0 +1,16 @@
+Now sometimes when you are dealing with complex objects it is possible that the value of a property may be known or undefined for a certain period of time. For example you might want to call different endpoints to get these objects from the server so then assignee might be null for a fraction of a second.
+
+There are two solution here, either use ngIf:
+
+<span *ngIf="task.assignee">{{ task.assignee.name }}</span>
+
+OR, use the SAFE TRAVERSAL OPERATOR:
+
+<span *ngIf>{{ task.assignee?.name }}</span>
+
+NOTE: the usage is putting a question mark. see above.
+
+DIFFERENCE between ngIf and safe traversal operator:
+
+ngIf - will remove the DOM element.
+Safe traversal - DOM element will be kept, the value will not be render.
