@@ -1,0 +1,83 @@
+OLD-WAY - When we were building template driven forms we added validation using HTML 5 attributes.
+So we had required, midlength, maxlength, and pattern.
+
+BETTER-WAY - Now when building reactive forms we don't use HTML 5 attributes here.
+We assign validators when creating FormControl objects.
+
+In our component/ts, we have a field called form. We can access these fields diretly.
+So, in ngIf, you can type form, now this form object, which is an instance of the FormGroup class, has a method called get and from here we can get access to any FomControl object, inside this group.
+
+COMPLETE CODE:
+signup form HTML:
+<form [formGroup]="form">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+        		formControlName="username"
+            id="username" 
+            type="text" 
+            class="form-control">
+            <div *ngIf="form.get('username').touched && form.get('username').invalid" class="alert alert-danger">Username is required.</div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+        		formControlName="password"
+            id="password" 
+            type="text" 
+            class="form-control">
+    </div>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+</form>
+
+---------------------------------------------------------------------------------
+signup form TS
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'signup-form',
+  templateUrl: './signup-form.component.html',
+  styleUrls: ['./signup-form.component.css']
+})
+export class SignupFormComponent {
+	form = new FormGroup( {
+		username: new FormGroup('', Validators.required),
+		password: new FormGroup('', Validators.required)
+	});
+	
+	get username() {
+		return this.form.get('username');
+	}
+}
+
+
+In our component/ts, we assign one or more validators when creating FormControl objects.
+At constructor, of the FormControl class there are three parameters.
+- first parameter(optional), is the formState, which is basically the initial value we set to this FormControl.
+NOTE: you have defined an empty string because you don't need an initial value.
+
+- second parameter(optional), is the validator. it's either a validatorFn which basically means validator function. Or it can be an array of validator functions. 
+So what are these validator functions? Well, in Angular we have a class called Validators, and this class is defined in angular/forms.
+
+NOTE: you need to add on Validator to '@angular/forms' e.g. import { FormGroup, FormControl, Validators } from '@angular/forms';
+NOTE: All the validators we have in our template driven forms(OLD-WAY), they exist here as well when you import Validators. Validators like minlength, required, etc..
+
+IMPORTANT: see above example that you are not calling the function required, you are simply passing a reference to that function.
+
+properties are look like fields from the outside but internally they are kinda like methods. See above - line 49. The get username property.
+
+If you didn't create a property, your html validations will look a little messy.
+e.g.
+ <div *ngIf="form.get('username').touched && form.get('username').invalid" class="alert alert-danger">Username is required.</div>
+ 
+To fix this, you need to add a property. - line 49. then delete the form.get('username') and change it to just username.
+e.g.
+ <div *ngIf="username.touched && username.invalid" class="alert alert-danger">Username is required.</div>
+
+
+
+
+
+
+
