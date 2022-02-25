@@ -1,0 +1,56 @@
+With template driven forms, we apply the ngModel directive to our input fields and this directive will internally create an instance of the FormControl class and associate it with the input. Now when building reactive forms, we should create these FormControl objects explicitly in the code.
+
+First we need to apply a directive to our form element, that is formGroup.
+With this directive, we associate this form element with an actual FormGroup object that we created in our component/ts.
+
+In our component/ts, we named the object/field (form). Use it in your template.
+
+Inside this group, we have two controls, username and password. see html.
+
+COMPLETE CODE:
+signup form HTML:
+<form [formGroup]="form">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+        		formControlName="username"
+            id="username" 
+            type="text" 
+            class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+        		formControlName="password"
+            id="password" 
+            type="text" 
+            class="form-control">
+    </div>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+</form>
+
+---------------------------------------------------------------------------------
+signup form TS
+import { Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+
+@Component({
+  selector: 'signup-form',
+  templateUrl: './signup-form.component.html',
+  styleUrls: ['./signup-form.component.css']
+})
+export class SignupFormComponent {
+	form = new FormGroup( {
+		username: new FormGroup(),
+		password: new FormGroup()
+	} )
+}
+
+NOTE: inside the FormGroup(), there are three parameters, and the last two are optional.
+NOTE: the first parameter includes the controls that are part of this form, so we need to pass an object.
+NOTE: in username and password, we don't need to put quotes in key value pairs UNLESS there is a special character to that field.
+NOTE: If you see an error "can't bind to FormGroup since it isn't known property of form.", you need to add ReactiveFormsModule to app.module.ts in the imports array and add import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+
+
+
+
