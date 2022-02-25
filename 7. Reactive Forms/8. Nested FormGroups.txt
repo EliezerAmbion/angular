@@ -1,0 +1,86 @@
+Imagine these username and password controls are part of a larger form. 
+And in that form we're going to have a subgroup called account.
+
+So in Angular, just so we have this directive called FormControlName
+We have another directive called FormGroupName. 
+
+-----------------------------------------------------------------------
+COMPLETE CODE:
+
+signup form TS:
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'signup-form',
+  templateUrl: './signup-form.component.html',
+  styleUrls: ['./signup-form.component.css']
+})
+export class SignupFormComponent {
+	form = new FormGroup({
+
+    NOTE: this is where we added our formGroup (account)
+    account: new FormGroup({
+  		username: new FormGroup('', Validators.required, UsernameValidators.shouldBeUnique),
+	  	password: new FormGroup('', Validators.required)
+    })
+	});
+
+  login() {
+    this.form.setErrors({
+      invalidLogin: true
+    });
+  }
+	
+	get username() {
+    NOTE: we add the full path to that control. - added account to username.
+		return this.form.get('account.username');
+	}
+}
+
+-----------------------------------------------------------------------
+signup form HTML:
+<form [formGroup]="form" (ngSubmit)="login()">
+  <div *ngIf="form.errors" class="alert alert-danger">
+    The username or password is invalid.
+  </div>
+
+  NOTE: this is where we added formGroupName
+  <div formGroupName="account">
+    <div class="form-group">
+        <label for="username">Username</label>
+
+        NOTE: TO SELF: When Angular sees this directive formControlName.
+        It's going to look up the username control under the account group.
+
+        <input 
+        		formControlName="username"
+            id="username" 
+            type="text" 
+            class="form-control">
+
+        <div *ngIf="username.pending">Checking for uniqueness...</div>
+
+        <div *ngIf="username.touched && username.invalid" class="alert alert-danger">
+
+        	<div *ngIf="username.errors.required">Username is required.</div>
+        	<div *ngIf="username.errors.minlength">Username should be minimum of {{ username.errors.minlength.requiredLength }}.</div>
+        	<div *ngIf="username.errors.cannotContainSpace">Username cannot contain space.</div>
+        	<div *ngIf="username.errors.shouldBeUnique">Username is already taken.</div>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+
+        NOTE: TO SELF: When Angular sees this directive formControlName.
+        It's going to look up the password control under the account group.
+        <input 
+        		formControlName="password"
+            id="password" 
+            type="text" 
+            class="form-control">
+    </div>
+  </div>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+</form>

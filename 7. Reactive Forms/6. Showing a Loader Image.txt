@@ -1,4 +1,13 @@
-COMPLETE CODE:
+You can use messages or glyphicons.
+
+You want to display this div while the async validator is waiting for the result to come back from the server.
+
+NOTE: The usernname is a property in your component that references a FormControl object. The FormControls have a property called pending.
+NOTE: Pending returns true if at least one async validator is in progress.
+e.g. code
+<div *ngIf="username.pending">Checking for uniqueness...</div>
+
+------------------------------------------------------------
 signup form HTML:
 <form [formGroup]="form">
     <div class="form-group">
@@ -8,12 +17,15 @@ signup form HTML:
             id="username" 
             type="text" 
             class="form-control">
+
+        NOTE: this is where we added our Loader
+        <div *ngIf="username.pending">Checking for uniqueness...</div>
+
         <div *ngIf="username.touched && username.invalid" class="alert alert-danger">
-        
         	<div *ngIf="username.errors.required">Username is required.</div>
-        	
         	<div *ngIf="username.errors.minlength">Username should be minimum of {{ username.errors.minlength.requiredLength }}.</div>
-        	
+        	<div *ngIf="username.errors.cannotContainSpace">Username cannot contain space.</div>
+        	<div *ngIf="username.errors.shouldBeUnique">Username is already taken.</div>
         </div>
     </div>
     <div class="form-group">
@@ -26,28 +38,3 @@ signup form HTML:
     </div>
     <button class="btn btn-primary" type="submit">Sign Up</button>
 </form>
-
-signup form TS
-import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-
-@Component({
-  selector: 'signup-form',
-  templateUrl: './signup-form.component.html',
-  styleUrls: ['./signup-form.component.css']
-})
-export class SignupFormComponent {
-	form = new FormGroup( {
-		username: new FormGroup('', [
-			Validators.required,
-			Validators.minLength(3)
-		]),
-		password: new FormGroup('', Validators.required)
-	});
-	
-	get username() {
-		return this.form.get('username');
-	}
-}
-
-NOTE: If you want to have multiple validators, you can add them in an array.

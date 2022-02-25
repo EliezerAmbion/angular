@@ -1,6 +1,5 @@
 Asynchronous means non blocking
 
-COMPLETE CODE:
 
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
@@ -24,7 +23,7 @@ export class UsernameValidators {
     }, 2000)
   }
 }
-This will have a compilation error. The error will be " A function who's declared type is neither void nor any must return a value"
+This will have a compilation error. The error will be "A function who's declared type is neither void nor any must return a value"
 NOTE: The issue we have in this code is that these values returning here are not returned from our validator function.
 They're returned from the callback function that we passed to the set timeout function.
 In other words, we define this method (shouldBeUnique) and we set the return type of this method to validation errors or null.
@@ -46,7 +45,7 @@ IMPORTANT: THIS IS AN EXAMPLE OF A PROMISE. DON'T USE THIS - USE OBSERVABLE INST
     })
   }
 
-SEE ABOVE EXAMPLE - instead of using return, you will use resolve.
+NOTE: instead of using return, you will use resolve.
 
 -------------------------------------------------------------------------------------------------------
 
@@ -81,7 +80,7 @@ signup form HTML:
             id="username" 
             type="text" 
             class="form-control">
-        <div *ngIf="form.get('username').touched && form.get('username').invalid" class="alert alert-danger">
+        <div *ngIf="username.touched && 'username.invalid" class="alert alert-danger">
         
         	<div *ngIf="username.errors.required">Username is required.</div>
         	
@@ -103,5 +102,3 @@ signup form HTML:
     </div>
     <button class="btn btn-primary" type="submit">Sign Up</button>
 </form>
-
-NOTE: added line 92

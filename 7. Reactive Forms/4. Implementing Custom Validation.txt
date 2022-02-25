@@ -1,11 +1,11 @@
 Create a file - e.g. username.validators.ts
 NOTE: all the validators should be in the folder of common/validators
 
-COMPLETE CODE:
-in username.validators.ts:
-
 NOTE: the method you created (cannotContainSpace()) or this function should take a parameter of type, abstract control.
 
+---------------------------------------------------------------------------------
+COMPLETE CODE:
+in username.validators.ts:
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 export class UsernameValidators {
@@ -19,7 +19,6 @@ export class UsernameValidators {
 }
 
 ---------------------------------------------------------------------------------
-
 signup form TS:
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -45,7 +44,6 @@ export class SignupFormComponent {
 }
 
 ----------------------------------------------------------------------------------
-
 signup form HTML:
 <form [formGroup]="form">
     <div class="form-group">
@@ -55,7 +53,7 @@ signup form HTML:
             id="username" 
             type="text" 
             class="form-control">
-        <div *ngIf="form.get('username').touched && form.get('username').invalid" class="alert alert-danger">
+        <div *ngIf="username.touched && username.invalid" class="alert alert-danger">
         
         	<div *ngIf="username.errors.required">Username is required.</div>
         	
