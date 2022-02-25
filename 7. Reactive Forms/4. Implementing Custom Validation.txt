@@ -1,0 +1,77 @@
+Create a file - e.g. username.validators.ts
+NOTE: all the validators should be in the folder of common/validators
+
+COMPLETE CODE:
+in username.validators.ts:
+
+NOTE: the method you created (cannotContainSpace()) or this function should take a parameter of type, abstract control.
+
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+
+export class UsernameValidators {
+  static cannotContainSpace(control: AbstractControl) : ValidationErrors | null {
+    if ((control.value as string).indexOf(' ') >=0) {
+      return { cannotContainSpace: true }
+    }else {
+      return null;
+    }
+  }
+}
+
+---------------------------------------------------------------------------------
+
+signup form TS:
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'signup-form',
+  templateUrl: './signup-form.component.html',
+  styleUrls: ['./signup-form.component.css']
+})
+export class SignupFormComponent {
+	form = new FormGroup( {
+		username: new FormGroup('', [
+			Validators.required,
+			Validators.minLength(3),
+      UsernameValidators.cannotContainSpace
+		]),
+		password: new FormGroup('', Validators.required)
+	});
+	
+	get username() {
+		return this.form.get('username');
+	}
+}
+
+----------------------------------------------------------------------------------
+
+signup form HTML:
+<form [formGroup]="form">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+        		formControlName="username"
+            id="username" 
+            type="text" 
+            class="form-control">
+        <div *ngIf="form.get('username').touched && form.get('username').invalid" class="alert alert-danger">
+        
+        	<div *ngIf="username.errors.required">Username is required.</div>
+        	
+        	<div *ngIf="username.errors.minlength">Username should be minimum of {{ username.errors.minlength.requiredLength }}.</div>
+
+        	<div *ngIf="username.errors.cannotContainSpace">Username cannot contain space.</div>
+        	
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+        		formControlName="password"
+            id="password" 
+            type="text" 
+            class="form-control">
+    </div>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+</form>
