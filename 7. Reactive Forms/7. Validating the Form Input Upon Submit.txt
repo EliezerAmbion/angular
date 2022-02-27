@@ -5,7 +5,7 @@ We can use it in our event binding expressions.
 e.g.
 <form [formGroup]="form" (ngSubmit)="login()">
 
-IMPORTANT: both the FormGroup and FormControl classes derived from from AbstractControl.
+IMPORTANT: the FormGroup, FormControl, and FormArray classes derived from AbstractControl.
 AbstractControl is the parent of these classes, it defines a set of common properties and methods that both these classes need. 
 One of these methods is setErrors. 
 

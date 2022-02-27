@@ -1,0 +1,31 @@
+There is a cleaner way to write the same code.
+In Angular, we have a class called FormBuilder that we use for building forms.
+
+---------------------------------------------------------------------------
+Sample ts:
+export class NewCourseFormComponent {
+  form = new FormGroup({
+    name: new FormControl('', Validators.required),
+    contact: new FormGroup({
+      email: new FormControl(),
+      phone: new FormControl()
+    })
+    topics: new FormArray([])
+  })
+}
+
+CLEANER WAY:
+export class NewCourseFormComponent {
+  form:
+
+  constructor(fb: FormBuilder) {
+    this.form = fb.group({
+      name: ['', Validators.required],
+      contact: fb.group({
+        email: [],
+        phone: []
+      })
+      topics: fb.array([])
+    })
+  }
+}

@@ -1,0 +1,40 @@
+We use the FormArray class to work with an array of objects in a form.
+
+---------------------------------------------------------------------------
+COMPLETE CODE:
+
+Sample html:
+<form>
+  <input type="text" class="form-control" (keyup.enter)="addTopic(topic)" #topic>
+  <ul class="list-group">
+    <li *ngFor="let topic of topics.controls"
+    (click)="removeTopic(topic)"
+    class="list-group-item">
+      {{ topic.value }}
+    </li>
+  </ul>
+</form>
+
+---------------------------------------------------------------------------
+Sample ts:
+export class NewCourseFormComponent {
+  form = new FormGroup({
+    topics: new FormArray([])
+  })
+
+addTopic(topic: HTMLInputElement) {
+  NOTE: we have use topics here, the getter you have created below - get topics()
+  this.topics.push(new FormControl(topic.value));
+  topic.value = '';
+  }
+
+  removeTopic(topic: FormControl) {
+    let index = this.topics.controls.indexOf(topiic);
+    this.topics.removeAt(index);
+  }
+
+  NOTE: this was created to make our code DRY
+  get topics() {
+    return this.form.get('topics') as FormArray;
+  }
+}

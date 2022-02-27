@@ -1,0 +1,71 @@
+RECAP:
+With reactive forms, we build our form explicitly in the code inside our component.
+- FormGroup({})
+- FormControl()
+
+Once we create out controls in the ts, then in the template, we use a few directives to associate the controls we created
+in the component.
+
+4 directives that you need to remember:
+- FormGroup - we apply using property binding and we bind this form element to the form object we created in the component.
+  e.g.
+  <form [formGroup]="form" (ngSubmit)="login()">
+
+- FormControlName - we use like an attribute to  associate an input field with a control in our form.
+  e.g.
+  <input 
+    formControlName="username"
+    id="username" 
+    type="text" 
+    class="form-control">
+
+- FormGroupName - we use this if we have a subgroup in our form.
+  e.g.
+  <div formGroupName="contact">
+
+- ngFor - if we have a formArray in our form, we use ngForm to iterate over all the controls in the array.
+  e.g.
+  <ul class="list-group">
+    <li *ngFor="let topic of topics.controls"
+    (click)="removeTopic(topic)"
+    class="list-group-item">
+      {{ topic.value }}
+    </li>
+  </ul>
+
+-------------------------------------------------------------------------------
+COMPLETE CODE:
+
+SAMPLE TS:
+export class NewCourseFormComponent {
+  form:
+
+  constructor(fb: FormBuilder) {
+    this.form = fb.group({
+      name: ['', Validators.required],
+      contact: fb.group({
+        email: [],
+        phone: []
+      })
+      topics: fb.array([])
+    })
+  }
+}
+
+-------------------------------------------------------------------------------
+SAMPLE TEMPLATE:
+<form [formGroup]="form>
+  <input formControlName="name" />
+  <div formGroupName="contact">
+    <input formControlName="email" />
+    <input formControlName="phone" />
+  </div>
+  
+   <ul class="list-group">
+    <li *ngFor="let topic of topics.controls"
+    (click)="removeTopic(topic)"
+    class="list-group-item">
+      {{ topic.value }}
+    </li>
+  </ul>
+</form>
