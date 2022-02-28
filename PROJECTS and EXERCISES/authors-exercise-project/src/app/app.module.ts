@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { TitleCasePipe } from './title-case.pipe';
 import { LikeExerciseComponent } from './like-exercise/like-exercise.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { PostsComponent } from './posts/posts.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,8 +21,9 @@ import { LikeExerciseComponent } from './like-exercise/like-exercise.component';
     TitleCasingExerciseComponent,
     TitleCasePipe,
     LikeExerciseComponent,
+    PostsComponent,
   ],
-  imports: [BrowserModule, FormsModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule],
   providers: [AuthorService],
   bootstrap: [AppComponent],
 })
