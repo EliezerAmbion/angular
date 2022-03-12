@@ -1,3 +1,15 @@
+As a best practice, constructors should be very small and light weight.
+So we shouldn't perform expensive operations like calling the server.
+
+We use OnInit life cycle hooks
+
+IMPORTANT: do not call http services in the constructor of your components.
+
+NOTE: if you need initialization, use ngOnInit instead.
+
+-----------------------------------------------------------------------
+posts.component.ts:
+
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -12,6 +24,7 @@ export class PostsComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
+  NOTE: we move all the code in the constructor in this ngOnInit method.
   ngOnInit() {
     this.http.get(this.url).subscribe((response) => {
       this.posts = response;

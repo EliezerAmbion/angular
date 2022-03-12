@@ -16,3 +16,6 @@ Singleton Pattern - In the memory we're going to have only a single instance of 
 
 Structural directives - are used for shaping or reshaping HTML DOM by adding, removing elements.
 Attribute directives - are used to change the appearance or behavior of DOM element.
+
+Life Cycle Hooks -  special methods that we can add to our component. 
+Angular will automatically call these methods at specific times. During the lifecycle of a component.

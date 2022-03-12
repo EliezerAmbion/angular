@@ -1,0 +1,69 @@
+
+posts.component.html:
+
+<input
+  (keyup.enter)="createPost(title)"
+  #title
+  type="text"
+  class="form-control"
+/>
+
+<ul>
+  <li *ngFor="let post of posts">
+
+  NOTE: we added a button with click event here for updatePost
+    <button (click)="updatePost(post)" class="btn btn-default btn-sm">
+      Update
+    </button>
+    {{ post.title }}
+  </li>
+</ul>
+
+
+-----------------------------------------------------------------------
+posts.component.ts:
+
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-posts',
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.css'],
+})
+export class PostsComponent {
+  posts: any;
+  private url = 'https://jsonplaceholder.typicode.com/posts';
+
+  constructor(private http: HttpClient) {
+    http.get(this.url).subscribe((response) => {
+      // console.log(response);
+      this.posts = response;
+    });
+  }
+
+  createPost(input: HTMLInputElement) {
+    let post: any = { title: input.value };
+    input.value = '';
+
+    this.http
+      .post(this.url, JSON.stringify(post))
+      .subscribe((response: any) => {
+        post.id = response.id;
+        this.posts.unshift(post);
+      });
+  }
+
+  // NOTE: we use patch method to update only a few properties in an object.
+  // NOTE: instead of sending the complete representation of that object to a server, we send only the properties that should be modified
+  // NOTE: take note that patch is not widely supported by all api's.
+
+  // IMPORTANT: when you use the patch or put methods, you need to reference a specific post. - (+ '/' + post.id)
+  updatePost(post: any) {
+    this.http
+      .patch(this.url + '/' + post.id, JSON.stringify({ isRead: true }))
+      .subscribe((response) => {
+        console.log(response);
+      });
+  }
+}

@@ -1,0 +1,77 @@
+posts.component.html:
+
+<input
+  (keyup.enter)="createPost(title)"
+  #title
+  type="text"
+  class="form-control"
+/>
+
+<ul>
+  <li *ngFor="let post of posts">
+    <button (click)="updatePost(post)" class="btn btn-default btn-sm">
+      Update
+    </button>
+    {{ post.title }}
+
+    NOTE: we added a button with click event here for deletePost
+    <button (click)="deletePost(post)" class="btn btn-danger btn-sm">
+      Delete
+    </button>
+  </li>
+</ul>
+
+-----------------------------------------------------------------------
+posts.component.ts:
+
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-posts',
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.css'],
+})
+export class PostsComponent {
+  posts: any;
+  private url = 'https://jsonplaceholder.typicode.com/posts';
+
+  constructor(private http: HttpClient) {
+    http.get(this.url).subscribe((response) => {
+      // console.log(response);
+      this.posts = response;
+    });
+  }
+
+  createPost(input: HTMLInputElement) {
+    let post: any = { title: input.value };
+    input.value = '';
+
+    this.http
+      .post(this.url, JSON.stringify(post))
+      .subscribe((response: any) => {
+        post.id = response.id;
+        this.posts.unshift(post);
+      });
+  }
+
+  updatePost(post: any) {
+    this.http
+      .patch(this.url + '/' + post.id, JSON.stringify({ isRead: true }))
+      .subscribe((response) => {
+        console.log(response);
+      });
+  }
+
+  // NOTE: here we don't have that body parameter.
+  // Because by convention, HTTP delete requests don't have a body.
+  // So all we need to send to the server is an HTTP delete request to this endpoint.
+
+  deletePost(post: any) {
+    this.http.delete(this.url + '/' + post.id).subscribe((response) => {
+      // NOTE: first we need to find the index of this post in the array.
+      let index = this.posts.indexOf(post);
+      this.posts.splice(index, 1);
+    });
+  }
+}
