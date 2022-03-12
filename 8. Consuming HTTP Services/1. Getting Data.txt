@@ -1,15 +1,13 @@
 NOTE: all the for working with http services are encapsulated in HttpClientModule.
 
-If you see an error 'No provider for Http!' - means you have inhected the http class but have not registered it as a provider.
-
-NOTE: as an argument to the get method, you need to set the URL.
+If you see an error 'No provider for Http!' - means you have injected the http class but have not registered it as a provider.
 
 import in app.module
 
 import { HttpClientModule } from '@angular/common/http';
 then in imports array - add HttpClientModule
 
-------------------------------------------------------------------
+=============================================================
 COMPLETE CODE:
 
 in ts:
@@ -24,6 +22,8 @@ import { HttpClient } from '@angular/common/http';
 export class PostsComponent implements OnInit {
   posts: any;
 
+NOTE: as an argument to the get method, you need to set the URL.
+
   constructor(http: HttpClient) {
     http
       .get('https://jsonplaceholder.typicode.com/posts')
@@ -36,7 +36,7 @@ export class PostsComponent implements OnInit {
   ngOnInit() {}
 }
 
-
+-----------------------------------------------------------------
 in HTML:
 <ul>
   <li *ngFor="let post of posts">

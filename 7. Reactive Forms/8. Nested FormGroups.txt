@@ -4,7 +4,8 @@ And in that form we're going to have a subgroup called account.
 So in Angular, just so we have this directive called FormControlName
 We have another directive called FormGroupName. 
 
------------------------------------------------------------------------
+
+=========================================================================
 COMPLETE CODE:
 
 signup form TS:
@@ -19,7 +20,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class SignupFormComponent {
 	form = new FormGroup({
 
-    NOTE: this is where we added our formGroup (account)
+    NOTE: this is where we added our formGroup - (account)
     account: new FormGroup({
   		username: new FormGroup('', Validators.required, UsernameValidators.shouldBeUnique),
 	  	password: new FormGroup('', Validators.required)
@@ -52,7 +53,6 @@ signup form HTML:
 
         NOTE: TO SELF: When Angular sees this directive formControlName.
         It's going to look up the username control under the account group.
-
         <input 
         		formControlName="username"
             id="username" 

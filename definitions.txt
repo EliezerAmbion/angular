@@ -4,7 +4,7 @@ App component - this is the root component. Every component starts from the app 
 Modules - is a container for a group of related components.
 App module - this is the root module.
 
-Service - is a class used for getting the data from an HTTP service.
+Service - is a class used for getting and saving the data from an HTTP service.
 
 Constructor - is a special type of method of a class and it will be automatically invoked when an instance of the class is created.
 It is where you initialize an object.

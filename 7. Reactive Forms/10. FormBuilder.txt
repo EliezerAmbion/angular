@@ -16,7 +16,7 @@ export class NewCourseFormComponent {
 
 CLEANER WAY:
 export class NewCourseFormComponent {
-  form:
+  form;
 
   constructor(fb: FormBuilder) {
     this.form = fb.group({

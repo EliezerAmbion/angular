@@ -3,7 +3,7 @@ With reactive forms, we build our form explicitly in the code inside our compone
 - FormGroup({})
 - FormControl()
 
-Once we create out controls in the ts, then in the template, we use a few directives to associate the controls we created
+Once we create our controls in the ts, then in the template, we use a few directives to associate the controls we created
 in the component.
 
 4 directives that you need to remember:
@@ -33,12 +33,13 @@ in the component.
     </li>
   </ul>
 
--------------------------------------------------------------------------------
+
+==============================================================================
 COMPLETE CODE:
 
 SAMPLE TS:
 export class NewCourseFormComponent {
-  form:
+  form;
 
   constructor(fb: FormBuilder) {
     this.form = fb.group({
