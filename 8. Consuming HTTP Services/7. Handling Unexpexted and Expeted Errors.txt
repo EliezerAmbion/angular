@@ -1,3 +1,11 @@
+In subscribe method, there is an optional parameter that is named error.
+You can see the indication that it is optional with a question mark.
+
+NOTE: ALL THE ERRORS SHOULD BE IN THE SERVICE AS WELL. (watch mosh angular video 111 - SEPARATION OF CONCERNS)
+
+===========================================================================
+posts.component.ts:
+
 import { PostService } from './../services/post.service';
 import { Component, OnInit } from '@angular/core';
 

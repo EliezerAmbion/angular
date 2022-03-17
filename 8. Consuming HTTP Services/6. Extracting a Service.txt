@@ -1,0 +1,121 @@
+Calling the http in the backend should be in the service.
+Let the sevice do all the work.
+
+All the service should be in the services folder
+use angular cli to create a service:
+
+ex: ng g s services/post
+
+NOTE: don't forget to put your newly created service in the app.module providers
+
+ex: providers: [AuthorService, PostService],
+
+and import it:
+
+ex: import { PostService } from './services/post.service';
+
+
+COMPLETE CODE:
+==========================================================================
+in posts.component.html:
+
+<input
+  (keyup.enter)="createPost(title)"
+  #title
+  type="text"
+  class="form-control"
+/>
+
+<ul>
+  <li *ngFor="let post of posts">
+    <button (click)="updatePost(post)" class="btn btn-default btn-sm">
+      Update
+    </button>
+    {{ post.title }}
+
+    <button (click)="deletePost(post)" class="btn btn-danger btn-sm">
+      Delete
+    </button>
+  </li>
+</ul>
+
+
+-------------------------------------------------------------------------
+in posts.component.ts:
+
+import { PostService } from './../services/post.service';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-posts',
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.css'],
+})
+export class PostsComponent implements OnInit {
+  posts: any;
+
+  constructor(private postService: PostService) {}
+
+  ngOnInit() {
+    this.postService.getPosts().subscribe((response) => {
+      this.posts = response;
+    });
+  }
+
+  createPost(input: HTMLInputElement) {
+    let post: any = { title: input.value };
+    input.value = '';
+
+    this.postService.createPost(post).subscribe((response: any) => {
+      post.id = response.id;
+      this.posts.unshift(post);
+    });
+  }
+
+  updatePost(post: any) {
+    this.postService.updatePost(post).subscribe((response) => {
+      console.log(response);
+    });
+  }
+
+  deletePost(post: any) {
+    this.postService.deletePost(post.id).subscribe((response) => {
+      let index = this.posts.indexOf(post);
+      this.posts.splice(index, 1);
+    });
+  }
+}
+
+-------------------------------------------------------------------------
+in post.service.ts
+
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class PostService {
+  private url = 'https://jsonplaceholder.typicode.com/posts';
+
+  constructor(private http: HttpClient) {}
+
+  getPosts() {
+    return this.http.get(this.url);
+  }
+
+  createPost(post: any) {
+    return this.http.post(this.url, JSON.stringify(post));
+  }
+
+  updatePost(post: any) {
+    return this.http.patch(
+      this.url + '/' + post.id,
+      JSON.stringify({ isRead: true })
+    );
+  }
+
+  deletePost(id: any) {
+    return this.http.delete(this.url + '/' + id);
+  }
+}
