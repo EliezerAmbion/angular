@@ -25,7 +25,7 @@ import { PostsComponent } from './posts/posts.component';
     PostsComponent,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule],
-  providers: [AuthorService, PostService],
+  providers: [AuthorService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
