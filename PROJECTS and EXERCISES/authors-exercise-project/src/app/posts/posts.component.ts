@@ -12,33 +12,38 @@ export class PostsComponent implements OnInit {
   constructor(private postService: PostService) {}
 
   ngOnInit() {
-    this.postService.getAll().subscribe((response) => {
-      (this.posts = response),
-        (err: any) => console.log(err),
-        () => console.log('Complete');
+    const http$ = this.postService.getAll();
+
+    http$.subscribe({
+      next: (response) => (this.posts = response),
+      error: (err) => console.log('error: ', err),
     });
   }
 
   createPost(input: HTMLInputElement) {
     let post: any = { title: input.value };
+    this.posts.unshift(post);
+
     input.value = '';
 
-    this.postService.create(post).subscribe((response: any) => {
-      post.id = response.id;
-      this.posts.unshift(post);
+    // NOTE: should delete post if the post is null or undefined
+    this.postService.create(post).subscribe({
+      next: (response: any) => (post.id = response.id),
+      error: (err) => this.posts.shift(post),
     });
   }
 
-  updatePost(post: any) {
-    this.postService.update(post).subscribe((response) => {
-      console.log(response);
-    });
+  updatePost(post: any, input: HTMLInputElement) {
+    input.value = post.title;
+    this.posts.shift(post);
+
+    this.postService.update(post).subscribe((response) => {});
   }
 
   deletePost(post: any) {
-    this.postService.delete(post.id).subscribe(() => {
-      let index = this.posts.indexOf(post);
-      this.posts.splice(index, 1);
-    });
+    let index = this.posts.indexOf(post);
+    this.posts.splice(index, 1);
+
+    this.postService.delete(post.id).subscribe(() => {});
   }
 }
