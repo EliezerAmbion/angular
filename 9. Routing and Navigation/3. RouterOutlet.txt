@@ -1,0 +1,6 @@
+router-outlet is a directive that is defined in the router module. 
+When Angular sees this, it is going to render the component associated with the current route.
+
+REMEMBER: the component will be renderend AFTER the router-outlet NOT inside.
+
+SYNTAX: <router-outlet></router-outlet>

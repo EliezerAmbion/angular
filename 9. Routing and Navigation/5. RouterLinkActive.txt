@@ -1,0 +1,23 @@
+routerLinkActive is used if we want to apply highlight dynamically in the navbar.
+
+REMEMBER: we set a string that includes a list Of CSS classes separated by space that should be applied when the link is active.
+
+SYNTAX: <li routerLinkActive="active current">
+
+COMPLETE CODE:
+in html:
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li routerLinkActive="active current">
+          <a routerLink="/author">Author</a>
+        </li>
+        <li routerLinkActive="active current">
+          <a routerLink="/posts">Posts</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

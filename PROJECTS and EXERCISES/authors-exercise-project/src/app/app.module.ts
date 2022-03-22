@@ -1,3 +1,5 @@
+import { NavbarComponent } from './navbar/navbar.component';
+import { RouterModule } from '@angular/router';
 import { PostService } from './services/post.service';
 import { AuthorService } from './author.service';
 import { NgModule } from '@angular/core';
@@ -13,6 +15,7 @@ import { LikeExerciseComponent } from './like-exercise/like-exercise.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { PostsComponent } from './posts/posts.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +26,31 @@ import { PostsComponent } from './posts/posts.component';
     TitleCasePipe,
     LikeExerciseComponent,
     PostsComponent,
+    NavbarComponent,
   ],
-  imports: [BrowserModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: TitleCasingExerciseComponent,
+      },
+      {
+        path: 'author',
+        component: AuthorComponent,
+      },
+      {
+        path: 'posts',
+        component: PostsComponent,
+      },
+      {
+        path: '**',
+        component: NotFoundComponent,
+      },
+    ]),
+  ],
   providers: [AuthorService],
   bootstrap: [AppComponent],
 })
