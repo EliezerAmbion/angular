@@ -1,0 +1,65 @@
+Pessimistic update means you're assuming that the call to the server will probably fail, and we will 
+only add this item to the list if we get a successful response from the server. 
+
+In contrast, we have optimistic update. 
+So instead of waiting to get the result from the server, we update the user interface immediately. 
+We assume that most of the time the call to the server is going to succeed. 
+But if that fails for any reason, then we're going to roll back our changes.
+
+
+==========================================================
+
+posts.component.ts:
+
+import { PostService } from './../services/post.service';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-posts',
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.css'],
+})
+export class PostsComponent implements OnInit {
+  posts: any;
+
+  constructor(private postService: PostService) {}
+
+  ngOnInit() {
+    const http$ = this.postService.getAll();
+
+    http$.subscribe({
+      next: (response) => (this.posts = response),
+      error: (err) => console.log('error: ', err),
+    });
+  }
+
+  createPost(input: HTMLInputElement) {
+    let post: any = { title: input.value };
+
+    NOTE: in here we created the post instead of creating inside the subscribe.
+    this.posts.unshift(post);
+
+    input.value = '';
+
+    this.postService.create(post).subscribe({
+
+      NOTE: then we set the post.id to the response.id so that it will be saved in the database
+      next: (response: any) => (post.id = response.id),
+      error: (err) => this.posts.shift(post),
+    });
+  }
+
+  updatePost(post: any, input: HTMLInputElement) {
+    input.value = post.title;
+    this.posts.shift(post);
+
+    this.postService.update(post).subscribe((response) => {});
+  }
+
+  deletePost(post: any) {
+    let index = this.posts.indexOf(post);
+    this.posts.splice(index, 1);
+
+    this.postService.delete(post.id).subscribe(() => {});
+  }
+}
