@@ -16,6 +16,7 @@ import { LikeExerciseComponent } from './like-exercise/like-exercise.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PostsComponent } from './posts/posts.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ObservableComponent } from './observable/observable.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     LikeExerciseComponent,
     PostsComponent,
     NavbarComponent,
+    ObservableComponent,
   ],
   imports: [
     BrowserModule,
