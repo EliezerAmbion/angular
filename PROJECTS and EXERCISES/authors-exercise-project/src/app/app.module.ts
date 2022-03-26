@@ -1,7 +1,7 @@
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { PostService } from './services/post.service';
-import { AuthorService } from './author.service';
+import { AuthorService } from './services/author.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
