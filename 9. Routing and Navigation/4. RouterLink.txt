@@ -1,0 +1,44 @@
+NOTE: when using href attribute, the entire page is downloaded and the Angular app is reinitialized and 
+all the resources in your application are redownloaded. i.e. JS bundles and styles.
+
+REMEMBER: routerLink is a directive, when using this directive, all of the resoureces will be going to be 
+downloaded once.
+
+This is important for single page apps (SPA's).
+
+REMEMBER: when you are deling with a dynamic URL, We don't want to send the user to a page like followers/1. 
+This parameter should be rendered dynamically. 
+When you are dealing with route parameters, instead of using the router link as an attribute, 
+we should use the property binding syntax.
+
+REMEMBER: instead of binding it to a string, you should bind it to an expression.
+In the expression, you have an array. 
+The first element in this array is the path, after this first element, we add all the route parameters.
+ex:
+<a [routerLink]="['/followers', follower.id]">{{ follower.login }}</a>
+
+LESSON: For simple route, you can use the RouterLink directive as an attribute and set it to a string value. 
+If you are dealing with route parameters, you should use the property binding syntax and set the value of that 
+property to an arra. 
+The first element in this array is the path, and the subsequent elements are route arguments.
+
+COMPLETE CODE:
+github-followers.component.html
+
+<div *ngFor="let follower of followers">
+  <div class="media-left">
+    <a routerLink="#">
+      <img
+        class="avatar media-object"
+        src="{{ follower.avatar_url }}"
+        alt="..."
+      />
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">
+      <a [routerLink]="['/followers', follower.id]">{{ follower.login }}</a>
+    </h4>
+    <a routerLink="follower.html_url">{{ follower.html_url }}</a>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+NOTE: Most likely we want to get this parameter, and use a service to get the profile of the given user. 
+
+REMEMBER: in order to get access to route parameters, we need to inject the activated route class in our constructor.
+ex:
+constructor(private route: ActivatedRoute) {}
+
+REMEMBER: You can get all the parameters using the paramMap
+ex:
+this.route.paramMap
+
+paramMap is an observable.
+
+REMEMBER: there are four fields/methods in params.
+get, getAll, has, and keys. 
+keys: This field returns all the keys for all the route parameters. 
+get: to get the value of a given route parameter. 
+getAll: to get the value of all route parameters, 
+has: to see if we have a parameter by the given name in this object.
+
+NOTE: to get the value of the id parameter, we call the get method like this -> .get('id');
+and store it in a variable.
+
+ex:
+  ngOnInit() {
+    this.route.paramMap.subscribe((params) => {
+      // console.log(params);
+      let id = params.get('id');
+    });
+  }
+
+COMPLETE CODE:
+github-profile.component.ts:
+
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-github-profile',
+  templateUrl: './github-profile.component.html',
+  styleUrls: ['./github-profile.component.css'],
+})
+export class GithubProfileComponent implements OnInit {
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.paramMap.subscribe((params) => {
+      // console.log(params);
+      let id = params.get('id');
+      console.log(id);
+    });
+  }
+}

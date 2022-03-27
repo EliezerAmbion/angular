@@ -1,15 +1,17 @@
+import { FormsModule } from '@angular/forms';
+import { GithubFollowersService } from './services/github-followers.service';
+import { GithubFollowersComponent } from './github-followers/github-followers.component';
+import { GithubProfileComponent } from './github-profile/github-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { PostService } from './services/post.service';
 import { AuthorService } from './services/author.service';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AuthorComponent } from './author/author.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { TitleCasingExerciseComponent } from './title-casing-exercise/title-casing-exercise.component';
-import { FormsModule } from '@angular/forms';
 import { TitleCasePipe } from './title-case.pipe';
 import { LikeExerciseComponent } from './like-exercise/like-exercise.component';
 
@@ -17,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PostsComponent } from './posts/posts.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ObservableComponent } from './observable/observable.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import { ObservableComponent } from './observable/observable.component';
     PostsComponent,
     NavbarComponent,
     ObservableComponent,
+    GithubProfileComponent,
+    GithubFollowersComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,8 +45,12 @@ import { ObservableComponent } from './observable/observable.component';
         component: TitleCasingExerciseComponent,
       },
       {
-        path: 'author',
-        component: AuthorComponent,
+        path: 'followers/:id',
+        component: GithubProfileComponent,
+      },
+      {
+        path: 'followers',
+        component: GithubFollowersComponent,
       },
       {
         path: 'posts',
@@ -53,7 +62,7 @@ import { ObservableComponent } from './observable/observable.component';
       },
     ]),
   ],
-  providers: [AuthorService],
+  providers: [AuthorService, GithubFollowersService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
