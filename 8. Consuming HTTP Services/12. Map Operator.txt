@@ -53,10 +53,11 @@ export class PostsComponent implements OnInit {
   constructor(private postService: PostService) {}
 
   ngOnInit() {
-    this.postService.getAll().subscribe((response) => {
-      (this.posts = response),
-        (err: any) => console.log(err),
-        () => console.log('Complete');
+    const http$ = this.postService.getAll();
+
+    http$.subscribe({
+      next: (response) => (this.posts = response),
+      error: (err) => console.log('error: ', err),
     });
   }
 
