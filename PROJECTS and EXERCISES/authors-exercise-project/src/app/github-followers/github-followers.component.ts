@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { GithubFollowersService } from './../services/github-followers.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 export class GithubFollowersComponent implements OnInit {
   followers: any[] = [];
 
-  constructor(private service: GithubFollowersService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private service: GithubFollowersService
+  ) {}
 
   ngOnInit() {
+    // GETTING THE REQUIRED PARAMETERS
+    this.route.paramMap.subscribe();
+    //  use the snapshot if we don't have a scenario where the user can navigate back to the same component.
+    // let id = this.route.snapshot.paramMap.get('id');
+
+    // GETTING THE QUERY PARAMETERS
+    this.route.queryParamMap.subscribe();
+
     this.service
       .getAll()
       .subscribe((followers) => (this.followers = followers));

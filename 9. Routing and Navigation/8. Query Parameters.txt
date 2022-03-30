@@ -1,0 +1,70 @@
+There are times that we want to include optional parameters to our route.
+
+The routerLink directive expose a property that we can use in our property binding expression.
+That is the queryParams.
+
+REMEMBER: bind the queryParams to an object.
+e.g.
+<a routerLink="/followers" [queryParams]="{ page: 1, order: 'newest' }">Followers</a>
+
+In the object, you can add all the optional parameters.
+
+COMPLETE CODE:
+
+navbar.component.html:
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li routerLinkActive="active current">
+          <a
+            routerLink="/followers"
+            [queryParams]="{ page: 1, order: 'newest' }"
+            >Followers</a
+          >
+        </li>
+        <li routerLinkActive="active current">
+          <a routerLink="/posts">Posts</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+-------------------------------------------------------
+
+github-followers.component.ts:
+
+import { ActivatedRoute } from '@angular/router';
+import { GithubFollowersService } from './../services/github-followers.service';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'github-followers',
+  templateUrl: './github-followers.component.html',
+  styleUrls: ['./github-followers.component.css'],
+})
+export class GithubFollowersComponent implements OnInit {
+  followers: any[] = [];
+
+  constructor(
+    private route: ActivatedRoute,
+    private service: GithubFollowersService
+  ) {}
+
+  ngOnInit() {
+    // GETTING THE REQUIRED PARAMETERS
+    this.route.paramMap.subscribe();
+
+    // GETTING THE QUERY PARAMETERS
+    this.route.queryParamMap.subscribe();
+
+    this.service
+      .getAll()
+      .subscribe((followers) => (this.followers = followers));
+  }
+}
+
+//NOTE:  use the snapshot if we don't have a scenario where the user can navigate back to the same component.
+// let id = this.route.snapshot.paramMap.get('id');
