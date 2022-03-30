@@ -40,7 +40,8 @@ In this array, you need to register all the dependencies that components in this
 If you forget this step, dependency injection is not going to work. It will have an error: No provider for ProductService.
 
 NOTE: when you register a dependency as a provider in a module, Angular will create a single instance of that class for that entire module.
-Singleton Pattern - In the memory we're going to have only a single instance of that service, and Angular will pass the same instance to all these components.
+Singleton Pattern - In the memory we're going to only have a single instance of that service, 
+and Angular will pass the same instance to all these components.
 
 Steps:
 1. add the service you want to use as a parameter in the component's constructor. In other words, as a dependency of this component.
