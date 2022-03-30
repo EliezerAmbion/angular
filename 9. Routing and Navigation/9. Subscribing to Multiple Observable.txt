@@ -1,3 +1,10 @@
+combineLatest - Instead of having two separate subscriptions to these two observables, you want to combine 
+these observables into a new observable, and then we'll subscribe to that observable.
+
+COMPLETE CODE:
+
+github.followers.component.ts:
+
 import { combineLatest, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { GithubFollowersService } from './../services/github-followers.service';
@@ -17,10 +24,11 @@ export class GithubFollowersComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // NOTE: we have used the combineLatest here.
     combineLatest([
       this.route.paramMap,
       this.route.queryParamMap,
-      // combined is an array w/ 2 elements, first is the latest paramMap object, secode is the latest queryParamMap object.
+      //NOTE: combined is an array w/ 2 elements, first is the latest paramMap object, secode is the latest queryParamMap object.
     ]).subscribe((combined: any) => {
       let id = combined[0].get('id');
       let page = combined[1].get('page');
