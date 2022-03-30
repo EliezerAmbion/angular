@@ -40,5 +40,5 @@ export class GithubFollowersComponent implements OnInit {
   }
 }
 
-// NOTE: as you can see, there are multiple subscribe method, you can use switchMap to make it cleaner.
+// NOTE: as you can see, there are multiple subscribe method, you can use switchMap operator to make it cleaner.
 // NOTE: see file number 10
