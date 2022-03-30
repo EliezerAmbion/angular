@@ -45,7 +45,7 @@ import { BrowserModule } from '@angular/platform-browser';
         component: TitleCasingExerciseComponent,
       },
       {
-        path: 'followers/:id',
+        path: 'followers/:id/:username',
         component: GithubProfileComponent,
       },
       {

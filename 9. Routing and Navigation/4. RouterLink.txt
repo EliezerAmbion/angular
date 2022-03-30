@@ -8,7 +8,7 @@ This is important for single page apps (SPA's).
 
 REMEMBER: when you are deling with a dynamic URL, We don't want to send the user to a page like followers/1. 
 This parameter should be rendered dynamically. 
-When you are dealing with route parameters, instead of using the router link as an attribute, 
+When you are dealing with route parameters, instead of using the routerLink as an attribute, 
 we should use the property binding syntax.
 
 REMEMBER: instead of binding it to a string, you should bind it to an expression.

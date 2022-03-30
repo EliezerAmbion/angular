@@ -1,0 +1,14 @@
+REMEMBER: as a technique to improve search engine optimization, you may decide to add the username of each user in the url.
+
+In forRootm you may want to add the username in the path.
+e.g.
+
+{
+  path: 'followers/:id/:username',
+  component: GithubProfileComponent,
+},
+
+and then in your html, you should add the corresponding parameter
+e.g.
+
+<a [routerLink]="['/followers', follower.id, follower.login]">{{ follower.login }}</a>
