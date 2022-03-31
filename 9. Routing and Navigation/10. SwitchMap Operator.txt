@@ -1,3 +1,9 @@
+NOTE: study more about switchMap operator. mosh didn't explain what this is.
+
+COMPLETE CODE:
+
+github-followers.component.ts:
+
 import { combineLatest, Observable, map, switchMap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { GithubFollowersService } from './../services/github-followers.service';
