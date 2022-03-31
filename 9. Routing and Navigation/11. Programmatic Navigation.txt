@@ -1,0 +1,42 @@
+PROGRAMMATIC NAVIGATION
+there are times that you may want to navigate the user programmatically.
+
+As a first argument, we need to pass an array of link parameters.
+So the same kind of array we use with the routerLink directive.
+The first element is the path, which is /followers,
+and if you have any required parameters we will add them after the first parameter.
+
+NOTE: this is the same to what we did in navbar.component.html
+NOTE: see Routing and Navigation folder - file number 8.
+
+COMPLETE CODE:
+
+github-profile.component.ts:
+
+import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-github-profile',
+  templateUrl: './github-profile.component.html',
+  styleUrls: ['./github-profile.component.css'],
+})
+export class GithubProfileComponent implements OnInit {
+  constructor(private router: Router) {}
+
+  submit() {
+    this.router.navigate(['/followers'], {
+      queryParams: { page: 1, order: 'newest' },
+    });
+  }
+
+  ngOnInit() {}
+}
+
+
+----------------------------------------------------------
+
+github-profile.component.html:
+
+<button class="btn btn-primary" (click)="submit()">Submit</button>

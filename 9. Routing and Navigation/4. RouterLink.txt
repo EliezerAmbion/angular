@@ -17,9 +17,9 @@ The first element in this array is the path, after this first element, we add al
 ex:
 <a [routerLink]="['/followers', follower.id]">{{ follower.login }}</a>
 
-LESSON: For simple route, you can use the RouterLink directive as an attribute and set it to a string value. 
+LESSON: For simple route, you can use the routerLink directive as an attribute and set it to a string value. 
 If you are dealing with route parameters, you should use the property binding syntax and set the value of that 
-property to an arra. 
+property to an array. 
 The first element in this array is the path, and the subsequent elements are route arguments.
 
 COMPLETE CODE:

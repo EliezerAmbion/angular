@@ -8,7 +8,7 @@ REMEMBER: You can get all the parameters using the paramMap
 ex:
 this.route.paramMap
 
-paramMap is an observable.
+REMEMBER: paramMap is an observable.
 
 REMEMBER: there are four fields/methods in params.
 get, getAll, has, and keys. 
