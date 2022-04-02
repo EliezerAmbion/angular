@@ -1,3 +1,7 @@
+There are 3 parameters in the post request, the url, body , and options.
+e.g.
+post(url: string, body: any, options?: RequestOptionsArgs) : Observable<Response>
+
 
 posts.component:
 

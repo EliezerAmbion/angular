@@ -11,7 +11,7 @@ NOTE: see Routing and Navigation folder - file number 8.
 
 COMPLETE CODE:
 
-github-profile.component.ts:
+github-profile.component.ts
 
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';

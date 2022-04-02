@@ -8,18 +8,22 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./github-profile.component.css'],
 })
 export class GithubProfileComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
-  // as a first argument, we need to pass an array of link parameters.
-  // So the same kind of array we use with the routerLink directive.
-  // The first element is the path, which is /followers,
-  // and if you have any required parameters we will add them after the first parameter.
+  id: any = '';
+  username: any = '';
+
+  ngOnInit() {
+    this.route.paramMap.subscribe((params) => {
+      // console.log(params);
+      this.id = params.get('id');
+      this.username = params.get('username');
+    });
+  }
 
   submit() {
     this.router.navigate(['/followers'], {
       queryParams: { page: 1, order: 'newest' },
     });
   }
-
-  ngOnInit() {}
 }

@@ -3,7 +3,7 @@ these observables into a new observable, and then we'll subscribe to that observ
 
 COMPLETE CODE:
 
-github.followers.component.ts:
+github-followers.component.ts
 
 import { combineLatest, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';

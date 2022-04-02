@@ -1,11 +1,11 @@
-NOTE: USE TWO-WAY-BINDING(ngModel) INSTEAD OF TEMPLATE VARIABLES when creating FORMS.
-When you use template variable, you will pass parameters around. Passing of parameters around is called procedural programming, and it is the OLD WAY. 
+NOTE: USE TWO-WAY-BINDING(ngModel) INSTEAD OF TEMPLATE REFERENCE VARIABLES when creating FORMS.
+When you use template reference variable, you will pass parameters around. Passing of parameters around is called procedural programming, and it is the OLD WAY. 
 You have to use object oriented programming instead.
 -> see two way binding.txt <-
 -------------------------------------------------------------------------------------------------------------------------------------
 
 
-TEMPLATE VARIABLES - a reference to the DOM element within a template.
+TEMPLATE REFERENCE VARIABLES - a reference to the DOM element within a template.
 
 Let us imagine that we want to get the value that was typed into the input field.
 
@@ -23,6 +23,7 @@ export class SampleComponent {
 Instead of passing the event object around, we can declare a variable in your template that reference the input field.
 ----- BETTER WAY -----
 e.g.
+NOTE: we have used the template reference variable inside the onKeyUp and get the value
 <input #email (keyup.enter)="onKeyUp(email.value)" />
 
 In method:
@@ -32,7 +33,7 @@ export class SampleComponent {
   }
 }
 
-Using the hashtag, you can create a name of your variable. We call this a TEMPLATE VARIABLE. And this references the input field that you created above.
+Using the hashtag, you can create a name of your variable. We call this a TEMPLATE REFERENCE VARIABLE. And this references the input field that you created above.
 e.g.
 #email
 
