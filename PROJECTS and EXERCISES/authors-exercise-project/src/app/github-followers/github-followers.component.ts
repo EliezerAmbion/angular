@@ -26,6 +26,9 @@ export class GithubFollowersComponent implements OnInit {
           return this.service.getAll();
         })
       )
-      .subscribe((followers) => (this.followers = followers));
+      .subscribe({
+        next: (followers) => (this.followers = followers),
+        error: (err) => console.log('ERROR: ', err.message),
+      });
   }
 }

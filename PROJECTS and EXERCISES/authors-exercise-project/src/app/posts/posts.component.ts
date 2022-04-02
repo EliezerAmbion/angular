@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostsComponent implements OnInit {
   posts: any;
+  test: string = '';
 
   constructor(private postService: PostService) {}
 
@@ -16,7 +17,7 @@ export class PostsComponent implements OnInit {
 
     http$.subscribe({
       next: (response) => (this.posts = response),
-      error: (err) => console.log('error: ', err),
+      error: (err) => console.log('error: ', err.message),
     });
   }
 
