@@ -1,0 +1,69 @@
+COMPLETE CODE:
+
+auth.service.ts
+
+import { map } from "rxjs/operators";
+import { Injectable } from "@angular/core";
+import { Http } from "@angular/http";
+
+@Injectable()
+export class AuthService {
+  constructor(private http: Http) {}
+
+  login(credentials) {
+    return this.http
+      .post("/api/authenticate", JSON.stringify(credentials))
+      .pipe(
+        map((response: any) => {
+          // console.log(response);
+          //NOTE: could be refactored. Instead of storing the response to a variable, use response instead.
+          let result = response;
+          if (result && result._body.token) {
+            localStorage.setItem("token", result._body.token);
+            return true;
+          }
+          return false;
+        })
+      );
+  }
+
+NOTE: implement the logout by removing the token in localStorage.
+  logout() {
+    localStorage.removeItem("token");
+  }
+
+  isLoggedIn() {
+    return false;
+  }
+}
+
+---------------------------------------------------------------
+
+home.component.ts
+
+import { AuthService } from "./../services/auth.service";
+import { Component } from "@angular/core";
+
+@Component({
+  selector: "home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.css"],
+})
+export class HomeComponent {
+  NOTE: the authservice has been injected, it should be public so that you can use it in your html.
+  constructor(public authService: AuthService) {}
+}
+
+---------------------------------------------------------------
+
+home.component.html
+
+<h1>Home Page</h1>
+<p>Welcome [NAME]</p>
+<ul>
+  <li><a routerLink="/admin">Admin</a></li>
+  <li><a routerLink="/login">Login</a></li>
+
+  NOTE: because you are injecting the authService in the home.component.ts, you can call the authService here w/ its logout method.
+  <li><a (click)="authService.logout()">Logout</a></li>
+</ul>
