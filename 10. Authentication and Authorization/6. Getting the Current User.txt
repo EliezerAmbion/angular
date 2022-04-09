@@ -1,3 +1,30 @@
+We have defined a property currentUser in our authService.
+Now with this property, we can display the name of the current user.
+
+COMPLETE CODE:
+
+home.component.html
+
+<h1>Home Page</h1>
+<p *ngIf="authService.isLoggedIn()">
+  Welcome {{ authService.currentUser.name }}
+</p>
+<ul>
+  <li *ngIf="authService.isLoggedIn() && authService.currentUser.admin">
+    <a routerLink="/admin">Admin</a>
+  </li>
+
+  <li *ngIf="!authService.isLoggedIn()"><a routerLink="/login">Login</a></li>
+
+  <li *ngIf="authService.isLoggedIn()">
+    <a (click)="authService.logout()">Logout</a>
+  </li>
+</ul>
+
+------------------------------------------------------------
+
+auth.service.ts
+
 import { map } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
@@ -12,8 +39,6 @@ export class AuthService {
       .post("/api/authenticate", JSON.stringify(credentials))
       .pipe(
         map((response: any) => {
-          // console.log(response);
-          //NOTE: could be refactored. Instead of storing the response to a variable, use response instead.
           let result = response;
           if (result && result._body.token) {
             localStorage.setItem("token", result._body.token);
@@ -40,6 +65,7 @@ export class AuthService {
     return !isExpired;
   }
 
+  NOTE: we can use this to get the name of a user
   get currentUser() {
     let token = localStorage.getItem("token");
     if (!token) return null;

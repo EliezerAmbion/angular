@@ -1,4 +1,5 @@
-With template driven forms, we apply the ngModel directive to our input fields and this directive will internally create an instance of the FormControl class and associate it with the input. Now when building reactive forms, we should create these FormControl objects explicitly in the code.
+With template driven forms, we apply the ngModel directive to our input fields and this directive will internally create an instance of the FormControl class and associate it with the input.
+Now when building reactive forms, we should create these FormControl objects explicitly in the code.
 
 First we need to apply a directive to our form element, that is formGroup.
 With this directive, we associate this form element with an actual FormGroup object that we created in our component/ts.

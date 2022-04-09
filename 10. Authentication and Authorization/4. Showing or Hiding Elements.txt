@@ -1,0 +1,107 @@
+LONG VERSION:
+
+isLoggedIn() {
+  let jwtHelper = new JwtHelper();
+  let token = localStorage.getItem("token");
+
+  if (!token) return false;
+
+  let expirationDate = jwtHelper.getTokenExpirationDate(token);
+  let isExpired = jwtHelper.isTokenExpired(token);
+
+  return !isExpired;
+}
+
+The above method is the long implementation of getting to know if a user is logged in.
+NOTE: There is a shorter and cleaner way to write this.
+
+Instead of writing all this code, we can use one of the global helper functions provided by Angular2-jwt.
+That function is called, tokenNotExpired.
+REMEMBER: tokenNotExpired means if the token is not expired, that means the user is logged in.
+
+e.g.
+
+SHORT VERSION:
+
+isLoggedIn() {
+  return tokenNotExpired();
+}
+
+REMEMBER: tokenNotExpired is exactly what we have done in the long version.
+
+NOTE: tokenNotExpired extracts a token by this name from the local storage,
+it checks to see if the token is falsey, then
+it looks at its expiration date and returns a boolean.
+
+
+COMPLETE CODE:
+
+home.component.html
+
+<h1>Home Page</h1>
+<p>Welcome [NAME]</p>
+<ul>
+  NOTE: this link is rendered if a user is logged in
+  <li *ngIf="authService.isLoggedIn()"><a routerLink="/admin">Admin</a></li>
+
+  NOTE: this link is rendered if a user is NOT logged in (notice the not operator)
+  <li *ngIf="!authService.isLoggedIn()"><a routerLink="/login">Login</a></li>
+
+  NOTE: this link is rendered if a user is logged in
+  <li *ngIf="authService.isLoggedIn()">
+    <a (click)="authService.logout()">Logout</a>
+  </li>
+</ul>
+
+----------------------------------------------------------
+
+home.component.ts
+
+import { AuthService } from "./../services/auth.service";
+import { Component } from "@angular/core";
+
+@Component({
+  selector: "home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.css"],
+})
+export class HomeComponent {
+  constructor(public authService: AuthService) {}
+}
+
+----------------------------------------------------------
+
+auth.service.ts
+
+import { map } from "rxjs/operators";
+import { Injectable } from "@angular/core";
+import { Http } from "@angular/http";
+import { JwtHelper } from "angular2-jwt";
+
+@Injectable()
+export class AuthService {
+  constructor(private http: Http) {}
+
+  login(credentials) {
+    return this.http
+      .post("/api/authenticate", JSON.stringify(credentials))
+      .pipe(
+        map((response: any) => {
+          let result = response;
+          if (result && result._body.token) {
+            localStorage.setItem("token", result._body.token);
+            return true;
+          }
+          return false;
+        })
+      );
+  }
+
+  logout() {
+    localStorage.removeItem("token");
+  }
+
+  isLoggedIn() {
+    return tokenNotExpired();
+}
+
