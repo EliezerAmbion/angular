@@ -1,6 +1,10 @@
 Even if a user is logged out, they can still access the admin page by typing in the address bar /admin.
 In Angular we have a concept called route guard, that we can apply in various routes to protect them.
 
+REMEMBER: we use route guard to protect our route from anonymous users.
+To implement a route guard, all we have to do is create a class/service that implements the canActivate interface,
+and in canActivate method, we check to see if the user is logged in or not.
+
 COMPLETE CODE:
 
 generated using angular cli
