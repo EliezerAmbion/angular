@@ -1,0 +1,87 @@
+When you want to access the admin page if you are logged out, you will be redirected to the login page because of 
+the route guard - canActivate. However, if you logged in, you will be redirected to the homepage.
+In terms of user experience, it would be nicer if You were redirected directly to the admin page, where you wanted to go.
+
+When you access the admin route, and the you will be redirected to the login page, WE SHOULD ALSO PASS THE QUERY PARAMETER.
+e.g.
+/login?returnUrl
+
+With this, when the user successfully logs in, we can take them back to where they wanted to go.
+
+COMPLETE CODE:
+
+auth-guard.service.ts
+
+import { AuthService } from "./auth.service";
+import { Injectable } from "@angular/core";
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  RouterStateSnapshot,
+} from "@angular/router";
+import { Observable } from "rxjs/Observable";
+
+@Injectable()
+export class AuthGuardService implements CanActivate {
+  constructor(
+    private readonly _authService: AuthService,
+    private readonly _router: Router
+  ) {}
+
+  // NOTE: canActivate taked two parameters, one is route, and the other is state.
+  // State parameter is of type RouterStateSnapshot
+  // REMEMBER: with the state paramter, we can get access to the URL that the user wanted to access.
+  canActivate(route, state: RouterStateSnapshot) {
+    if (this._authService.isLoggedIn()) return true;
+
+    // REMEMBER: in the parameters array of navigate, the first element is the path,
+    // second element is an object with one property.
+    this._router.navigate(["/login"], {
+      queryParams: { returnUrl: state.url },
+    });
+    return false;
+  }
+}
+
+----------------------------------------------------------
+
+login.component.ts
+
+import { AuthService } from "./../services/auth.service";
+import { Component } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+
+@Component({
+  selector: "login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"],
+})
+export class LoginComponent {
+  invalidLogin: boolean = false;
+
+  // NOTE: In order to access route parameters, we need to inject the activated route service.
+  constructor(
+    private readonly _router: Router,
+    private readonly _authService: AuthService,
+    private readonly _route: ActivatedRoute
+  ) {}
+
+  signIn(credentials) {
+    this._authService.login(credentials).subscribe((result) => {
+      if (result) {
+        // NOTE: Now here wecan safely use the snapshot, because on this login page,
+        // we don't have a link or a button that takes the user to the same page.
+        // In other words, we don't need to subscribe to the query paramMap observable.
+        let returnUrl = this._route.snapshot.queryParamMap.get("returnUrl");
+
+        // navigate to returnUrl if you have a returnUrl in your route parameters,
+        // otherwise, navigate to the homepage.
+        this._router.navigate([returnUrl || "/"]);
+      } else {
+        this.invalidLogin = true;
+      }
+    });
+  }
+}
+
