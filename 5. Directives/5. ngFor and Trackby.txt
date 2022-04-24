@@ -27,8 +27,8 @@ NOTE: don't call the method, just add the method as a reference.
 COMPLETE CODE:
 
 <button (click)="loadCourses()"> Load Courses </button>
-<ul>
-  <li *ngFor="let course of courses; trackBy: trackCourse >
+<ul *ngIf="courses">
+  <li *ngFor="let course of courses; trackBy: trackCourseById >
     {{ course.name }}
   </li>
 </ul>
@@ -36,17 +36,17 @@ COMPLETE CODE:
 
 in .ts:
 export class AppComponent {
-  courses = [
+  courses;
+
+  loadCourses(){
+    return this.courses= [
     { id: 1, name: 'course1' },
     { id: 2, name: 'course2' },
     { id: 3, name: 'course3' },
-  ];
-
-  loadCourses(){
-    return this.courses;
+    ];
   }
 
-  trackCourse(index, course){
+  trackCourseById(index, course){
     return course ? course.id : undefined;
   }
 }
