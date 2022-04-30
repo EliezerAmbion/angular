@@ -6,7 +6,7 @@ There are two solution here, either use ngIf:
 
 OR, use the SAFE TRAVERSAL OPERATOR:
 
-<span *ngIf>{{ task.assignee?.name }}</span>
+<span>{{ task.assignee?.name }}</span>
 
 NOTE: the usage is putting a question mark. see above.
 

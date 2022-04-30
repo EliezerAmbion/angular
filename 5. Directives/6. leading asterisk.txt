@@ -7,22 +7,26 @@ rewrite the block using an ng-template element.
 
 e.g.
 
-<div *ngIf="courses.length > 0; else noCourses">
+<p *ngIf="courses.length > 0; else noCourses">
   List of Courses
-</div>
+</p>
+
+<ng-template #noCourses>
+  <p>No courses</p>
+</ng-template>
 
 With the code above, using a leading asterisk, Angular will rewrite it like this:
 
 <ng-template [ngIf]="courses.length > 0">
-  <div>
+  <p>
     List of Courses
-  </div>
+  </p>
 </ng-template>
 
 <ng-template [ngIf]="!(courses.length > 0)">
-  <div>
-    List of Courses
-  </div>
+  <p>
+    No Courses
+  </p>
 </ng-template>
 
 NOTE: Angular will going to apply ngIf as property binding on the ng-template.
